@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark">#182867</color>
+    <!-- TODO: Better to have hex value in color names, like favourites_tint_e3452a -->
     <color name="title_text_color">#07195C</color>
     <color name="purple_button_color">#774DA2</color>
     <color name="price_text_big">#035A97</color>

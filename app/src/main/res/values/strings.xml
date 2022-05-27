@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">WowCart</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="product_image_description">Product Image</string>
+
+    <!-- TODO: Do not put in strings unused in production text -->
     <string name="product_title">Product title</string>
     <string name="product_description">product description</string>
     <string name="price_large">300</string>
