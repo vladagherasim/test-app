@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_right_standard">@dimen/_32sdp</dimen>
+    <dimen name="padding_small">@dimen/_8sdp</dimen>
+    <dimen name="padding_regular">@dimen/_16sdp</dimen>
+    <dimen name="title_text">@dimen/_14sdp</dimen>
+    <dimen name="regular_text">@dimen/_9sdp</dimen>
+</resources>

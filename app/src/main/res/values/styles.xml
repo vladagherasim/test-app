@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="title_text">
+        <item name="android:textColor">@color/dark</item>
+        <item name="android:textSize">@dimen/title_text</item>
+        <item name="android:fontFamily">@font/open_sans_extra_bold</item>
+    </style>
+    <style name="regular_text">
+        <item name="android:textColor">@color/common_text</item>
+        <item name="android:textSize">@dimen/regular_text</item>
+        <item name="android:fontFamily">@font/open_sans_regular</item>
+    </style>
+</resources>
