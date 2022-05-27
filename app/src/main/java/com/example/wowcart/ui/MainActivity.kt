@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        //TODO: viewBinding
         setContentView(R.layout.product_recyclerview_item)
     }
 }
