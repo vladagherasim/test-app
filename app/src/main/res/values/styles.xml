@@ -6,7 +6,7 @@
         <item name="android:fontFamily">@font/open_sans_extra_bold</item>
     </style>
     <style name="regular_text">
-        <item name="android:textColor">@color/common_text</item>
+        <item name="android:textColor">@color/common_text_424a56</item>
         <item name="android:textSize">@dimen/regular_text</item>
         <item name="android:fontFamily">@font/open_sans_regular</item>
     </style>
