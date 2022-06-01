@@ -43,7 +43,6 @@ class ProductAdapter(
     ) {
         //Create mapper Item.toUIModel(holder) || if ViewHolder is ...
         val item = getItem(position) as Product? ?: return
-        item.map{}
 
         if (payloads.isEmpty()) {
             holder.bind(item)
