@@ -1,12 +1,24 @@
 package com.example.wowcart.domain
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.wowcart.data.ProductApi
+import com.example.wowcart.ui.Product
 import kotlinx.coroutines.launch
 
+fun <T> createListedLiveData(): MutableLiveData<Result<List<T>>> {
+    return MutableLiveData()
+}
+
+fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> {
+    return this
+}
+
 class ProductViewModel : ViewModel() {
-    private val _status = MutableLiveData<String>()
-    val status : LiveData<String> = _status
+    private val _status = createListedLiveData<Product>()
+    val status  = _status.toLiveData()
 
     init {
         getData()
@@ -14,11 +26,15 @@ class ProductViewModel : ViewModel() {
 
     fun getData() {
         viewModelScope.launch {
-            try {
-                val listResult = ProductApi.retrofitService.getData()
-                _status.value = "Success"
+            _status.value = try {
+                val listResult = ProductApi.retrofitService.getData().results.map {
+                    Product(
+                     it.id, it.mainImage, it.name, it.details, it.price.toDouble(), false
+                    )
+                }
+                Result.success(listResult)
             } catch (e: Exception) {
-                _status.value = "Failure: ${e.message}"
+                Result.failure(e)
             }
         }
     }

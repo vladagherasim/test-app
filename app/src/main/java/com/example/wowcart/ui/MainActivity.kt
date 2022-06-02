@@ -21,17 +21,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.feedRecyclerView.adapter = adapter
         viewModel.getData()
-        viewModel.status.observe(){
-            adapter.submitList(it)
-        }
-        //view.getData()
-        //liveData.observe() {}
-        //adapter.submitList(it)
+        binding.lifecycleOwner = this
+
 
     }
 
 
-    fun onItemFavorite(string: String, isFav: Boolean) {
+    private fun onItemFavorite(string: String, isFav: Boolean) {
         Toast.makeText(this, "isFav: $string", Toast.LENGTH_SHORT).show()
     }
 }

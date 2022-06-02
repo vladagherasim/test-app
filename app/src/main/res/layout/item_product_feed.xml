@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- TODO: do not use tools:ignore, better to have any warns, they are significantly easier to be noticed, then ignored problems. -->
     <ImageView
         android:id="@+id/productImage"
         android:layout_width="wrap_content"
@@ -108,7 +107,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/addToFavoritesButton"
             app:layout_constraintTop_toBottomOf="@+id/priceLarge"
-            app:tint="@color/dark"
+            app:tint="@color/dark_182867"
             tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
