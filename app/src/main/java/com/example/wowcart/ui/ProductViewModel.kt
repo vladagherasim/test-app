@@ -1,4 +1,4 @@
-package com.example.wowcart.domain
+package com.example.wowcart.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

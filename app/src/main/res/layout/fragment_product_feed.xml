@@ -6,17 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/stableButtons"
+    <com.example.wowcart.ui.ToolbarView
+        android:id="@+id/toolbarHolder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/filterBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:toolbarLeftImage="@drawable/ic_user"
+        app:toolbarCenterImage="@drawable/ic_logo"
+        app:toolbarRightImage="@drawable/ic_favorites"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/filterBar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="1dp"
@@ -24,10 +29,11 @@
 
         <ImageButton
             android:id="@+id/filterButton"
+            android:contentDescription="@string/product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_small"
-            android:backgroundTint="@color/cardview_light_background"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,10 +54,13 @@
 
         <ImageButton
             android:id="@+id/gridButton"
+            android:contentDescription="@string/product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/padding_small"
-            android:backgroundTint="@color/white"
+            android:layout_marginStart="@dimen/padding_small"
+            app:tint="@drawable/buttons_tint_selector"
+            android:backgroundTint="@drawable/buttons_background_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,10 +68,12 @@
 
         <ImageButton
             android:id="@+id/listButton"
+            android:contentDescription="@string/product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            app:tint="@color/dark_182867"
+            android:layout_marginStart="@dimen/padding_small"
+            app:tint="@drawable/buttons_tint_selector"
+            android:backgroundTint="@drawable/buttons_background_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/gridButton"
             app:layout_constraintTop_toTopOf="parent"

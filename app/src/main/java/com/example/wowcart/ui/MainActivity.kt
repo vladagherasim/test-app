@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.wowcart.databinding.FragmentProductFeedBinding
-import com.example.wowcart.domain.ProductViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: FragmentProductFeedBinding
@@ -19,9 +18,20 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = FragmentProductFeedBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.feedRecyclerView.adapter = adapter
+        binding.apply {
+            listButton.setOnClickListener{
+                listButton.isEnabled = !listButton.isEnabled
+                gridButton.isEnabled = !listButton.isEnabled
+            }
+            gridButton.setOnClickListener{
+                gridButton.isEnabled = !gridButton.isEnabled
+                listButton.isEnabled = !gridButton.isEnabled
+            }
+
+        }
+        /*binding.feedRecyclerView.adapter = adapter
         viewModel.getData()
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this*/
 
 
     }
