@@ -1,43 +1,32 @@
 package com.example.wowcart.ui
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.wowcart.databinding.FragmentProductFeedBinding
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.example.wowcart.R
+import com.example.wowcart.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: FragmentProductFeedBinding
-    private val viewModel: ProductViewModel by viewModels()
-    private val adapter = ProductAdapter(this::onItemFavorite)
-
-
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         installSplashScreen()
-        binding = FragmentProductFeedBinding.inflate(layoutInflater)
+
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.apply {
-            listButton.setOnClickListener{
-                listButton.isEnabled = !listButton.isEnabled
-                gridButton.isEnabled = !listButton.isEnabled
-            }
-            gridButton.setOnClickListener{
-                gridButton.isEnabled = !gridButton.isEnabled
-                listButton.isEnabled = !gridButton.isEnabled
-            }
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+
 
         }
-        /*binding.feedRecyclerView.adapter = adapter
-        viewModel.getData()
-        binding.lifecycleOwner = this*/
 
 
-    }
 
-
-    private fun onItemFavorite(string: String, isFav: Boolean) {
-        Toast.makeText(this, "isFav: $string", Toast.LENGTH_SHORT).show()
-    }
 }

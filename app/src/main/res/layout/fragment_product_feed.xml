@@ -9,31 +9,34 @@
     <com.example.wowcart.ui.ToolbarView
         android:id="@+id/toolbarHolder"
         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/filterBar"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/filterBar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:toolbarCenterImage="@drawable/ic_logo_small"
         app:toolbarLeftImage="@drawable/ic_user"
-        app:toolbarCenterImage="@drawable/ic_logo"
-        app:toolbarRightImage="@drawable/ic_favorites"
-        />
+        app:toolbarRightImage="@drawable/ic_favorites" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/filterBar"
         app:layout_constraintTop_toBottomOf="@+id/toolbarHolder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_48sdp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
         <ImageButton
             android:id="@+id/filterButton"
-            android:contentDescription="@string/product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_small"
             android:backgroundTint="@color/white"
+            android:contentDescription="@string/product_description"
+            android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -54,30 +57,30 @@
 
         <ImageButton
             android:id="@+id/gridButton"
-            android:contentDescription="@string/product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/padding_small"
-            android:layout_marginStart="@dimen/padding_small"
-            app:tint="@drawable/buttons_tint_selector"
             android:backgroundTint="@drawable/buttons_background_selector"
+            android:contentDescription="@string/product_description"
+            android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_grid" />
+            app:srcCompat="@drawable/ic_grid"
+            app:tint="@drawable/buttons_tint_selector" />
 
         <ImageButton
             android:id="@+id/listButton"
-            android:contentDescription="@string/product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_small"
-            app:tint="@drawable/buttons_tint_selector"
             android:backgroundTint="@drawable/buttons_background_selector"
+            android:contentDescription="@string/product_description"
+            android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/gridButton"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_list" />
+            app:srcCompat="@drawable/ic_list"
+            app:tint="@drawable/buttons_tint_selector" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -88,8 +91,29 @@
         app:layout_constraintTop_toBottomOf="@id/filterBar"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="16dp">
-
     </androidx.recyclerview.widget.RecyclerView>
+
+    <com.example.wowcart.ui.BottomBarView
+        android:id="@+id/bottomBarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cartIcon="@drawable/ic_add_cart"
+        app:itemsNumber="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:middleText="MY CART">
+
+    </com.example.wowcart.ui.BottomBarView>
+
+<!--    <Button
+        android:id="@+id/cartAccessButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomBarView"
+        app:layout_constraintEnd_toEndOf="@+id/bottomBarView"
+        app:layout_constraintStart_toStartOf="@+id/bottomBarView"
+        app:layout_constraintTop_toTopOf="@id/bottomBarView" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

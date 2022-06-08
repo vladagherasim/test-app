@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productFeed">
+    <fragment
+        android:id="@+id/productFeed"
+        android:name="com.example.wowcart.ui.ProductFeed">
+        <action
+            android:id="@+id/action_productFeed_to_favorites"
+            app:destination="@id/favorites"/>
+    </fragment>
+    <fragment
+        android:id="@+id/favorites"
+        android:name="com.example.wowcart.ui.Favorites">
+        <action
+            android:id="@+id/action_favorites_to_productFeed"
+            app:destination="@id/productFeed"/>
+    </fragment>
+
+</navigation>

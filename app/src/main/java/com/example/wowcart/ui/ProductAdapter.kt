@@ -67,6 +67,10 @@ class ItemViewHolder(
 
     fun bind(item: Product) {
         setProductImage(item.image)
+        setProductTitle(item.title)
+        setProductDescription(item.description)
+        setProductPrice(item.price)
+        setProductFavoriteStatus(item.isFavorite)
 
     }
 

@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = "http://mobile-shop-api.hiring.devebs.net/products"
+private const val BASE_URL = "http://mobile-shop-api.hiring.devebs.net/products/"
 
 private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ProductApiService {
     @GET("/products")
-    suspend fun getData() : ProductsResponse
+    suspend fun getProducts() : ProductsResponse
 }
 
 object ProductApi {
