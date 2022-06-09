@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.wowcart.R
 import com.example.wowcart.databinding.ViewBottomBarBinding

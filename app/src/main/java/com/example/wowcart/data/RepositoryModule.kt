@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
-@Provides
-@Singleton
-fun provideProductRepository()= ProductsRepository(ProductApi.retrofitService)
- }
+    @Provides
+    @Singleton
+    fun provideProductRepository() = ProductsRepository(ProductApi.retrofitService)
+}

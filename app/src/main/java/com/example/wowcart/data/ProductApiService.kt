@@ -1,12 +1,11 @@
 package com.example.wowcart.data
 
-import com.example.wowcart.data.dto.ProductDTO
 import com.example.wowcart.data.dto.ProductsResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.http.GET
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 
 private const val BASE_URL = "http://mobile-shop-api.hiring.devebs.net/products/"
 
@@ -20,7 +19,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ProductApiService {
     @GET("/products")
-    suspend fun getProducts() : ProductsResponse
+    suspend fun getProducts(): ProductsResponse
 }
 
 object ProductApi {

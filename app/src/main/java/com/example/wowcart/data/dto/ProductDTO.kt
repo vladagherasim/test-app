@@ -1,6 +1,5 @@
 package com.example.wowcart.data.dto
 
-
 import com.google.gson.annotations.SerializedName
 
 data class ProductDTO(

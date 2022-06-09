@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wowcart.data.ProductApi
 import com.example.wowcart.data.repos.ProductsRepository
+import com.example.wowcart.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,26 +25,28 @@ suspend fun <T> MutableLiveData<T>.assignValue(value: T) {
         this@assignValue.value = value
     }
 }
+
 @HiltViewModel
-class ProductViewModel @Inject constructor(private val repository: ProductsRepository) : ViewModel() {
+class ProductViewModel @Inject constructor(private val repository: ProductsRepository) :
+    ViewModel() {
     private val _status = createListedLiveData<Product>()
-    val status  = _status.toLiveData()
+    val status = _status.toLiveData()
 
     init {
         getProducts()
     }
 
-    fun getProducts() {
-        viewModelScope.launch(Dispatchers.IO){
+    private fun getProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
             val result = try {
                 val listResult = repository.getProducts().map {
                     Product(
-                     it.id, it.mainImage, it.name, it.details, it.price.toDouble(), false
+                        it.id, it.mainImage, it.name, it.details, it.price.toDouble(), false
                     )
                 }
-                Result.success(listResult)
+                Result.Success(listResult)
             } catch (e: Exception) {
-                Result.failure(e)
+                Result.Failed(e)
             }
             _status.assignValue(result)
         }

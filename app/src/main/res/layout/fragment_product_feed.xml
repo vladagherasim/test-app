@@ -10,7 +10,6 @@
         android:id="@+id/toolbarHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/filterBar"
         app:layout_constraintBottom_toTopOf="@+id/filterBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -19,13 +18,13 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:toolbarCenterImage="@drawable/ic_logo_small"
         app:toolbarLeftImage="@drawable/ic_user"
-        app:toolbarRightImage="@drawable/ic_favorites" />
+        app:toolbarRightImage="@drawable/ic_heart" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/filterBar"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarHolder"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_48sdp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarHolder"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
@@ -57,30 +56,29 @@
 
         <ImageButton
             android:id="@+id/gridButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_marginEnd="@dimen/padding_small"
-            android:backgroundTint="@drawable/buttons_background_selector"
+            android:background="@drawable/selector_buttons_background"
             android:contentDescription="@string/product_description"
-            android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_grid"
-            app:tint="@drawable/buttons_tint_selector" />
+            app:tint="@drawable/selector_buttons_tint" />
 
         <ImageButton
             android:id="@+id/listButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@drawable/buttons_background_selector"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:background="@drawable/selector_buttons_background"
             android:contentDescription="@string/product_description"
-            android:minHeight="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/gridButton"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_list"
-            app:tint="@drawable/buttons_tint_selector" />
+            app:tint="@drawable/selector_buttons_tint" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -89,14 +87,18 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filterBar"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/_53sdp"
         app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="16dp">
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:layout_editor_absoluteX="16dp"/>
 
     <com.example.wowcart.ui.BottomBarView
         android:id="@+id/bottomBarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_small"
+        android:layout_marginEnd="@dimen/padding_small"
+        android:layout_marginBottom="@dimen/_20sdp"
         app:cartIcon="@drawable/ic_add_cart"
         app:itemsNumber="3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,15 +107,6 @@
         app:middleText="MY CART">
 
     </com.example.wowcart.ui.BottomBarView>
-
-<!--    <Button
-        android:id="@+id/cartAccessButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomBarView"
-        app:layout_constraintEnd_toEndOf="@+id/bottomBarView"
-        app:layout_constraintStart_toStartOf="@+id/bottomBarView"
-        app:layout_constraintTop_toTopOf="@id/bottomBarView" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

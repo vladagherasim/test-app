@@ -49,7 +49,6 @@ class ToolbarView @JvmOverloads constructor(
         }
     }
 
-
     private fun getTypedArray(
         context: Context,
         attributeSet: AttributeSet,

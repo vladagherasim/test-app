@@ -4,4 +4,8 @@
     <string name="product_image_description">Product Image</string>
     <string name="product_description">product description</string>
     <string name="filters_text">FILTERS</string>
+    <string name="price_holder">$%s</string>
+    <string name="information">INFORMATION</string>
+    <string name="buy_now_button">BUY NOW</string>
+    <string name="add_to_cart">ADD TO CART</string>
 </resources>

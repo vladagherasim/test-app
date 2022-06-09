@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_regular"
+        android:layout_width="@dimen/_88sdp"
+        android:layout_height="@dimen/_66sdp"
+        android:layout_marginStart="@dimen/padding_small"
         android:layout_marginTop="@dimen/padding_regular"
         android:contentDescription="@string/product_image_description"
         android:src="@drawable/ic_launcher_foreground"
@@ -25,20 +25,19 @@
         app:layout_constraintStart_toEndOf="@+id/productImage"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TODO: check figma design and make correct constrains -->
         <TextView
             android:id="@+id/priceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_small"
-            android:layout_marginTop="@dimen/_11sdp"
             android:fontFamily="@font/open_sans_semi_bold"
             android:gravity="center_vertical"
             tools:text="300"
             android:textColor="@color/price_text_small_9cb1bc"
             android:textSize="@dimen/_9ssp"
             app:layout_constraintStart_toEndOf="@+id/priceLarge"
-            app:layout_constraintTop_toBottomOf="@+id/productDescription"
+            app:layout_constraintTop_toTopOf="@id/priceLarge"
+            app:layout_constraintBottom_toBottomOf="@id/priceLarge"
             tools:ignore="TextContrastCheck" />
 
         <TextView
@@ -58,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Product description"
+            android:maxLines="1"
             android:layout_marginTop="@dimen/padding_small"
             android:textAppearance="@style/regular_text"
             app:layout_constraintStart_toStartOf="parent"

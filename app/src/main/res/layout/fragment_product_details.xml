@@ -4,7 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/productInFeedContainer"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_100ssp">
+    android:layout_height="match_parent">
 
+    <com.example.wowcart.ui.ToolbarView
+        android:id="@+id/toolbarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolbarCenterImage="@drawable/ic_dots"
+        app:toolbarLeftImage="@drawable/ic_user"
+        app:toolbarRightImage="@drawable/ic_heart" />
+
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarView"
+        tools:srcCompat="@drawable/ic_logo" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:backgroundTint="@color/gray_e5ebe9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemImage"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_52sdp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/addItemToCart"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginStart="@dimen/padding_small"
+            android:background="@drawable/shape_add_to_cart_background"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/add_to_cart"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buyItem"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buyItem"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_buy_button_background"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/buy_now_button"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintStart_toEndOf="@+id/addItemToCart"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

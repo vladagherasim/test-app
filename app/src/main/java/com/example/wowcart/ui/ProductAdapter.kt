@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.wowcart.R
 import com.example.wowcart.databinding.ItemProductFeedBinding
 
@@ -13,7 +14,6 @@ private const val ITEM_PRODUCT: Int = 1
 class ProductAdapter(
     private val favoriteListener: (String, Boolean) -> Unit
 ) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         if (viewType == ITEM_PRODUCT) {
             val binding = ItemProductFeedBinding.inflate(
@@ -29,7 +29,6 @@ class ProductAdapter(
         onBindViewHolder(holder, position, mutableListOf())
     }
 
-
     override fun getItemViewType(position: Int): Int {
         return if (getItem(position) is Product) ITEM_PRODUCT
         else throw IllegalArgumentException("No such type")
@@ -41,7 +40,6 @@ class ProductAdapter(
         position: Int,
         payloads: MutableList<Any>
     ) {
-        //Create mapper Item.toUIModel(holder) || if ViewHolder is ...
         val item = getItem(position) as Product? ?: return
 
         if (payloads.isEmpty()) {
@@ -64,6 +62,7 @@ class ItemViewHolder(
     private val favoriteListener: (String, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    private val context = itemView.context
 
     fun bind(item: Product) {
         setProductImage(item.image)
@@ -75,12 +74,12 @@ class ItemViewHolder(
     }
 
     fun setProductImage(image: String) {
-        binding.productImage.setImageResource(R.drawable.ic_logo)
+        binding.productImage.load(image)
     }
 
     fun setProductPrice(price: Double) {
         binding.priceLarge.text = price.toString()
-        binding.priceSmall.text = price.toString()
+        binding.priceSmall.text = context.getString(R.string.price_holder, price.toString())
     }
 
     fun setProductDescription(description: String) {

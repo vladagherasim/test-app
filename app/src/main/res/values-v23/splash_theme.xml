@@ -3,7 +3,7 @@
 
     <style name="Theme.AppSplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/dark_182867</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_splash</item>
         <item name="windowSplashScreenAnimationDuration">300</item>
         <item name="postSplashScreenTheme">@style/Theme.WowCart</item>
 

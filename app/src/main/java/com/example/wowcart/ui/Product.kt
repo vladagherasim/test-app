@@ -1,13 +1,13 @@
 package com.example.wowcart.ui
 
-data class Product (
+data class Product(
     val id: Int,
     val image: String,
     val title: String,
     val description: String,
     val price: Double,
     val isFavorite: Boolean
-) :Item {
+) : Item {
     override fun areItemsTheSame(other: Any): Boolean {
 
         return other is Product && id == other.id
