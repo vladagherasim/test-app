@@ -1,19 +1,18 @@
-package com.example.wowcart.ui
+package com.example.wowcart.ui.view
 
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.wowcart.R
-import com.example.wowcart.databinding.ViewBottomBarBinding
+import com.example.wowcart.databinding.ViewToolbarBinding
 
-class BottomBarView @JvmOverloads constructor(
+class ToolbarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
     private val viewBinding =
-        ViewBottomBarBinding.inflate(
+        ViewToolbarBinding.inflate(
             LayoutInflater.from(context), this,
             true
         )
@@ -25,17 +24,27 @@ class BottomBarView @JvmOverloads constructor(
     }
 
     private fun initAttributes(context: Context, attrs: AttributeSet) {
-        val attr: TypedArray = getTypedArray(context, attrs, R.styleable.BottomBar) ?: return
+        val attr: TypedArray = getTypedArray(context, attrs, R.styleable.Toolbar) ?: return
 
         viewBinding.apply {
-            cartButtonInBottomBar.setImageResource(
+            leftButton.setImageResource(
                 attr.getResourceId(
-                    R.styleable.BottomBar_cartIcon,
+                    R.styleable.Toolbar_toolbarLeftImage,
                     R.drawable.ic_user
                 )
             )
-            middleText.text = attr.getString(R.styleable.BottomBar_middleText)
-            cartText.text = attr.getString(R.styleable.BottomBar_itemsNumber)
+            middleButton.setImageResource(
+                attr.getResourceId(
+                    R.styleable.Toolbar_toolbarCenterImage,
+                    R.drawable.ic_logo
+                )
+            )
+            rightButton.setImageResource(
+                attr.getResourceId(
+                    R.styleable.Toolbar_toolbarRightImage,
+                    R.drawable.ic_favorites
+                )
+            )
 
         }
     }

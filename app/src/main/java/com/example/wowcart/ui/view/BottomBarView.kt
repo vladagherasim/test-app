@@ -1,18 +1,19 @@
-package com.example.wowcart.ui
+package com.example.wowcart.ui.view
 
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.wowcart.R
-import com.example.wowcart.databinding.ViewToolbarBinding
+import com.example.wowcart.databinding.ViewBottomBarBinding
 
-class ToolbarView @JvmOverloads constructor(
+class BottomBarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
     private val viewBinding =
-        ViewToolbarBinding.inflate(
+        ViewBottomBarBinding.inflate(
             LayoutInflater.from(context), this,
             true
         )
@@ -24,27 +25,17 @@ class ToolbarView @JvmOverloads constructor(
     }
 
     private fun initAttributes(context: Context, attrs: AttributeSet) {
-        val attr: TypedArray = getTypedArray(context, attrs, R.styleable.Toolbar) ?: return
+        val attr: TypedArray = getTypedArray(context, attrs, R.styleable.BottomBar) ?: return
 
         viewBinding.apply {
-            leftButton.setImageResource(
+            cartButtonInBottomBar.setImageResource(
                 attr.getResourceId(
-                    R.styleable.Toolbar_toolbarLeftImage,
+                    R.styleable.BottomBar_cartIcon,
                     R.drawable.ic_user
                 )
             )
-            middleButton.setImageResource(
-                attr.getResourceId(
-                    R.styleable.Toolbar_toolbarCenterImage,
-                    R.drawable.ic_logo
-                )
-            )
-            rightButton.setImageResource(
-                attr.getResourceId(
-                    R.styleable.Toolbar_toolbarRightImage,
-                    R.drawable.ic_favorites
-                )
-            )
+            middleText.text = attr.getString(R.styleable.BottomBar_middleText)
+            cartText.text = attr.getString(R.styleable.BottomBar_itemsNumber)
 
         }
     }

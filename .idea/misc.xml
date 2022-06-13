@@ -28,7 +28,7 @@
         <entry key="app/src/main/res/drawable/shape_button_background_light.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/shape_buy_button_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.10891590678824721" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_product_feed.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_product_feed.xml" value="0.35507246376811596" />

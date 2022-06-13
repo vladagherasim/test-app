@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Favorites">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.example.wowcart.ui.ToolbarView
+        android:id="@+id/favoritesToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/favoritesLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolbarCenterImage="@drawable/ic_logo_small"
+        app:toolbarLeftImage="@drawable/ic_user"
+        app:toolbarRightImage="@drawable/ic_favorites_selected" />
 
-</FrameLayout>
+    <com.example.wowcart.ui.BottomBarView
+        android:id="@+id/bottomBarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_small"
+        android:layout_marginEnd="@dimen/padding_small"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:cartIcon="@drawable/ic_add_cart"
+        app:itemsNumber="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:middleText="@string/my_cart">
+
+    </com.example.wowcart.ui.BottomBarView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favoritesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/favoritesToolbar"
+        tools:layout_editor_absoluteX="36dp">
+
+        <TextView
+            android:id="@+id/favoritesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/favorites"
+            android:textAppearance="@style/title_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sortBy"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/sortBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/sort_by"
+            android:textColor="@color/dark_182867"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chevronIcon"
+            app:layout_constraintStart_toEndOf="@+id/favoritesText"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428" />
+
+        <ImageView
+            android:id="@+id/chevronIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_chevron_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sortBy"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/dark_gray_141515" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
