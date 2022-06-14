@@ -9,7 +9,6 @@ data class Product(
     val isFavorite: Boolean
 ) : Item {
     override fun areItemsTheSame(other: Any): Boolean {
-
         return other is Product && id == other.id
     }
 
@@ -19,6 +18,7 @@ data class Product(
                 && this.description == other.description
                 && this.price == other.price
                 && this.image == other.image
+                && this.isFavorite == other.isFavorite
     }
 
     override fun getChangePayload(other: Any): MutableList<Payloads> {

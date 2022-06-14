@@ -1,5 +1,6 @@
 package com.example.wowcart.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +13,7 @@ import com.example.wowcart.databinding.ItemProductFeedBinding
 private const val ITEM_PRODUCT: Int = 1
 
 class ProductAdapter(
-    private val favoriteListener: (String, Boolean) -> Unit
+    private val favoriteListener: (Product, Boolean) -> Unit
 ) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         if (viewType == ITEM_PRODUCT) {
@@ -41,10 +42,14 @@ class ProductAdapter(
         payloads: MutableList<Any>
     ) {
         val item = getItem(position) as Product? ?: return
-
-        if (payloads.isEmpty()) {
+        val myPayload = payloads.firstOrNull() as List<Any>?
+        if (position == 0) {
+            Log.d("payoads", "total = $payloads")
+            Log.d("payoads", myPayload.toString())
+        }
+        if (myPayload.isNullOrEmpty()) {
             holder.bind(item)
-        } else payloads.forEach {
+        } else myPayload.forEach {
             when (it) {
                 is ProductPayloads.TitleChanged -> holder.setProductTitle(it.newTitle)
                 is ProductPayloads.DescriptionChanged -> holder.setProductDescription(it.newDescription)
@@ -59,7 +64,7 @@ class ProductAdapter(
 
 class ItemViewHolder(
     private val binding: ItemProductFeedBinding,
-    private val favoriteListener: (String, Boolean) -> Unit
+    private val favoriteListener: (Product, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val context = itemView.context
@@ -91,12 +96,19 @@ class ItemViewHolder(
     }
 
     fun setProductFavoriteStatus(isFavorite: Boolean) {
+        binding.addToFavoritesButton.setImageResource(
+            when (isFavorite) {
+                true -> (R.drawable.ic_favorites_selected_feed)
+                false -> (R.drawable.ic_favorites)
+            }
+        )
         binding.addToFavoritesButton.isSelected = isFavorite
     }
 
     fun setOnClickListeners(item: Product) {
         binding.addToFavoritesButton.setOnClickListener {
-            favoriteListener(item.title, !it.isSelected)
+            favoriteListener(item, !it.isSelected)
+            binding.addToFavoritesButton.isSelected = !it.isSelected
         }
     }
 }
@@ -108,6 +120,10 @@ class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
 
     override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
         return oldItem.areContentsTheSame(newItem)
+    }
+
+    override fun getChangePayload(oldItem: Item, newItem: Item): Any? {
+        return oldItem.getChangePayload(newItem)
     }
 
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.Favorites">
 
-    <com.example.wowcart.ui.ToolbarView
+    <com.example.wowcart.ui.view.ToolbarView
         android:id="@+id/favoritesToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         app:toolbarLeftImage="@drawable/ic_user"
         app:toolbarRightImage="@drawable/ic_favorites_selected" />
 
-    <com.example.wowcart.ui.BottomBarView
+    <com.example.wowcart.ui.view.BottomBarView
         android:id="@+id/bottomBarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:middleText="@string/my_cart">
 
-    </com.example.wowcart.ui.BottomBarView>
+    </com.example.wowcart.ui.view.BottomBarView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favoritesLayout"
@@ -84,5 +84,13 @@
             app:tint="@color/dark_gray_141515" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoritesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/favoritesLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

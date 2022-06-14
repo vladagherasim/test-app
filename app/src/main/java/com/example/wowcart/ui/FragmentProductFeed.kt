@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wowcart.R
 import com.example.wowcart.databinding.FragmentProductFeedBinding
-import com.example.wowcart.utils.Result
+import com.example.wowcart.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +39,9 @@ class ProductFeed : Fragment() {
                 gridButton.isEnabled = !gridButton.isEnabled
                 listButton.isEnabled = !gridButton.isEnabled
             }
+            toolbarHolder.viewBinding.rightButton.setOnClickListener {
+                findNavController().navigate(R.id.action_productFeed_to_favorites)
+            }
             bottomBarView.setOnClickListener {
                 Toast.makeText(context, "Cart button clicked", Toast.LENGTH_SHORT).show()
             }
@@ -44,8 +49,11 @@ class ProductFeed : Fragment() {
         return binding.root
     }
 
-    private fun onItemFavorite(string: String, isFav: Boolean) {
-        Toast.makeText(this.context, "isFav: $string", Toast.LENGTH_SHORT).show()
+    private fun onItemFavorite(product: Product, isFav: Boolean) {
+        when (isFav) {
+            true -> viewModel.insert(product.id)
+            false -> viewModel.delete(product.id)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,17 +63,17 @@ class ProductFeed : Fragment() {
             feedRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             viewModel.status.observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is Result.Failed -> showException(result.exception)
-                    is Result.Success -> adapter.submitList(result.data)
-                }
+                adapter.submitList(result)
+            }
+            viewModel.exceptions.observe(viewLifecycleOwner) {
+                it.printStackTrace()
             }
         }
     }
 
 }
 
-private fun showException(exception: Exception) {
+fun showException(exception: Exception) {
     Log.d("Exception", "_____________")
     exception.printStackTrace()
     Log.d("Exception", "END : _____________")

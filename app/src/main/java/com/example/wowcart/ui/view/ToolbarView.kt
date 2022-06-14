@@ -11,7 +11,7 @@ import com.example.wowcart.databinding.ViewToolbarBinding
 class ToolbarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-    private val viewBinding =
+     val viewBinding =
         ViewToolbarBinding.inflate(
             LayoutInflater.from(context), this,
             true

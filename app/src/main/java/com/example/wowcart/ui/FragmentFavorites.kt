@@ -5,46 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.wowcart.R
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.wowcart.databinding.FragmentFavoritesBinding
+import com.example.wowcart.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class Favorites : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
+    private lateinit var binding: FragmentFavoritesBinding
+    private val viewModel by viewModels<ProductViewModel>()
+    private val adapter = ProductAdapter(this::onItemFavorite)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater)
+        super.onCreate(savedInstanceState)
+        binding = FragmentFavoritesBinding.inflate(layoutInflater)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Favorites.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Favorites().apply {
-                arguments = Bundle().apply {
-
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            favoritesRecyclerView.adapter = adapter
+            favoritesRecyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            viewModel.status.observe(viewLifecycleOwner) { result ->
+                /*when (result) {
+                    is DataResult.Failed -> showException(result.exception)
+                    is DataResult.Success -> adapter.submitList(result.data)
+                }*/
             }
+        }
     }
+
+    private fun onItemFavorite(product: Product, isFav: Boolean) {
+
+    }
+
 }

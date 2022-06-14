@@ -14,6 +14,6 @@ interface ProductDao {
     @Query("SELECT * FROM products_table")
     fun getFavoriteProducts(): Flow<List<ProductEntity>>
 
-    @Query("DELETE FROM products_table")
-    suspend fun clearFavorites()
+    @Query("DELETE FROM products_table WHERE id =:id")
+    suspend fun deleteFavorite(id: Int)
 }

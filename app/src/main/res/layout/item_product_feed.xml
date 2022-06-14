@@ -82,7 +82,7 @@
             android:adjustViewBounds="false"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/product_description"
-            android:src="@drawable/ic_favorites"
+            android:src="@drawable/selector_animated"
             app:backgroundTint="@color/white"
             app:fabSize="mini"
             app:layout_constraintBottom_toBottomOf="parent"
