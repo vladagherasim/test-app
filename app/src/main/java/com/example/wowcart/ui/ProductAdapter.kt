@@ -13,7 +13,7 @@ import com.example.wowcart.databinding.ItemProductFeedBinding
 private const val ITEM_PRODUCT: Int = 1
 
 class ProductAdapter(
-    private val favoriteListener: (Product, Boolean) -> Unit
+    private val favoriteListener: (Product, Boolean) -> Unit, private val itemClickListener: (Int) -> Unit
 ) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         if (viewType == ITEM_PRODUCT) {
@@ -22,7 +22,7 @@ class ProductAdapter(
                 parent,
                 false
             )
-            return ItemViewHolder(binding, favoriteListener)
+            return ItemViewHolder(binding, favoriteListener, itemClickListener)
         } else throw IllegalArgumentException("No such type")
     }
 
@@ -44,8 +44,8 @@ class ProductAdapter(
         val item = getItem(position) as Product? ?: return
         val myPayload = payloads.firstOrNull() as List<Any>?
         if (position == 0) {
-            Log.d("payoads", "total = $payloads")
-            Log.d("payoads", myPayload.toString())
+            Log.d("payloads", "total = $payloads")
+            Log.d("payloads", myPayload.toString())
         }
         if (myPayload.isNullOrEmpty()) {
             holder.bind(item)
@@ -64,7 +64,8 @@ class ProductAdapter(
 
 class ItemViewHolder(
     private val binding: ItemProductFeedBinding,
-    private val favoriteListener: (Product, Boolean) -> Unit
+    private val favoriteListener: (Product, Boolean) -> Unit,
+    private val itemClickListener: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val context = itemView.context
@@ -109,6 +110,9 @@ class ItemViewHolder(
         binding.addToFavoritesButton.setOnClickListener {
             favoriteListener(item, !it.isSelected)
             binding.addToFavoritesButton.isSelected = !it.isSelected
+        }
+        binding.productInFeedContainer.setOnClickListener {
+            itemClickListener(item.id)
         }
     }
 }

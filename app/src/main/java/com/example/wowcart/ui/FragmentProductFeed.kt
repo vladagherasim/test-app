@@ -1,7 +1,6 @@
 package com.example.wowcart.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +11,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wowcart.R
 import com.example.wowcart.databinding.FragmentProductFeedBinding
-import com.example.wowcart.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductFeed : Fragment() {
 
     private lateinit var binding: FragmentProductFeedBinding
-    private val viewModel by viewModels<ProductViewModel>()
-    private val adapter = ProductAdapter(this::onItemFavorite)
+    private val viewModel by viewModels<ProductFeedViewModel>()
+    private val adapter = ProductAdapter(this::onItemFavorite, this::onItemClick)
+
+    private fun onItemClick(id: Int) {
+        val directions = ProductFeedDirections.actionProductFeedToProductDetails(id)
+        findNavController().navigate(directions)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,10 +74,4 @@ class ProductFeed : Fragment() {
         }
     }
 
-}
-
-fun showException(exception: Exception) {
-    Log.d("Exception", "_____________")
-    exception.printStackTrace()
-    Log.d("Exception", "END : _____________")
 }

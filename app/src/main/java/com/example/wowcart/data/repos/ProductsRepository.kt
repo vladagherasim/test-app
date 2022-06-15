@@ -9,6 +9,7 @@ import com.example.wowcart.ui.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ProductsRepository @Inject constructor(
@@ -16,29 +17,24 @@ class ProductsRepository @Inject constructor(
     private val productDao: ProductDao
 ) {
 
-    suspend fun getProducts(): List<ProductDTO> {
-        val response = productService.getProducts()
-        return response.results
-    }
-
     suspend fun getProductsForFeed(): Flow<List<Product>> {
         return combine(
-                flowOf(productService.getProducts()),
-                productDao.getFavoriteProducts()
-            ) { remote, db ->
-                val favIds = db.map { it.id }
-                remote.results.map {
-                    Product(
-                        it.id,
-                        it.mainImage,
-                        it.name,
-                        it.details,
-                        it.price.toDouble(),
-                        it.id in favIds
-                    )
-                }
+            flowOf(productService.getProducts()),
+            productDao.getFavoriteProducts()
+        ) { remote, db ->
+            val favIds = db.map { it.id }
+            remote.results.map {
+                Product(
+                    it.id,
+                    it.mainImage,
+                    it.name,
+                    it.details,
+                    it.price.toDouble(),
+                    it.id in favIds
+                )
             }
         }
+    }
 
 
     suspend fun insert(productID: Int) {
@@ -55,8 +51,18 @@ class ProductsRepository @Inject constructor(
         productDao.insert(productEntity)
     }
 
-    suspend fun getFavorites(): Flow<List<ProductEntity>> {
-        return productDao.getFavoriteProducts()
+    fun getFavorites(): Flow<List<Product>> {
+        return productDao.getFavoriteProducts().map {
+            it.map {
+                Product(
+                    it.id, it.image, it.name, it.details, it.price, true
+                )
+            }
+        }
+    }
+
+    suspend fun getItemById (id:Int): ProductDTO {
+        return productService.getProductById(id)
     }
 
     suspend fun deleteFavorite(id: Int) {

@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wowcart.databinding.FragmentFavoritesBinding
-import com.example.wowcart.utils.DataResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class Favorites : Fragment() {
 
     private lateinit var binding: FragmentFavoritesBinding
-    private val viewModel by viewModels<ProductViewModel>()
-    private val adapter = ProductAdapter(this::onItemFavorite)
+    private val viewModel by viewModels<ProductFavoritesViewModel>()
+    private val adapter = ProductAdapter(this::onItemFavorite, this::onItemClick)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,16 +34,22 @@ class Favorites : Fragment() {
             favoritesRecyclerView.adapter = adapter
             favoritesRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            viewModel.status.observe(viewLifecycleOwner) { result ->
-                /*when (result) {
-                    is DataResult.Failed -> showException(result.exception)
-                    is DataResult.Success -> adapter.submitList(result.data)
-                }*/
+            viewModel.favorites.observe(viewLifecycleOwner) { result ->
+                adapter.submitList(result)
+            }
+            viewModel.exceptions.observe(viewLifecycleOwner) {
+                it.printStackTrace()
             }
         }
     }
 
     private fun onItemFavorite(product: Product, isFav: Boolean) {
+        when (isFav) {
+            true -> viewModel.insert(product.id)
+            false -> viewModel.delete(product.id)
+        }
+    }
+    private fun onItemClick(id: Int) {
 
     }
 

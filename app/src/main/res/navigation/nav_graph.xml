@@ -7,8 +7,15 @@
         android:id="@+id/productFeed"
         android:name="com.example.wowcart.ui.ProductFeed">
         <action
+            android:id="@+id/action_productFeed_to_productDetails"
+            app:destination="@id/productDetails">
+            <argument
+                android:name="id"
+                app:argType="integer"/>
+        </action>
+        <action
             android:id="@+id/action_productFeed_to_favorites"
-            app:destination="@id/favorites"/>
+            app:destination="@id/favorites" />
     </fragment>
     <fragment
         android:id="@+id/favorites"
@@ -17,5 +24,8 @@
             android:id="@+id/action_favorites_to_productFeed"
             app:destination="@id/productFeed"/>
     </fragment>
+    <fragment
+        android:id="@+id/productDetails"
+        android:name="com.example.wowcart.ui.ProductDetails"/>
 
 </navigation>
