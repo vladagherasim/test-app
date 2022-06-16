@@ -6,51 +6,146 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/viewSeparatorBottom"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="176dp"
-        android:backgroundTint="@color/gray_e5ebe9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceSmaller" />
-
-    <com.example.wowcart.ui.view.ToolbarView
-        android:id="@+id/toolbarView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:toolbarCenterImage="@drawable/ic_dots"
-        app:toolbarLeftImage="@drawable/ic_user"
-        app:toolbarRightImage="@drawable/ic_heart" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/itemImage"
-        android:contentDescription="@string/product_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarView"
-        tools:srcCompat="@drawable/ic_logo" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/viewSeparatorTop"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:backgroundTint="@color/gray_e5ebe9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemImage" />
+            <View
+                android:id="@+id/viewSeparatorBottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/padding_small"
+                android:backgroundTint="@color/gray_e5ebe9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priceSmaller" />
+
+            <com.example.wowcart.ui.view.ToolbarView
+                android:id="@+id/toolbarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:toolbarCenterImage="@drawable/ic_dots"
+                app:toolbarLeftImage="@drawable/ic_user"
+                app:toolbarRightImage="@drawable/ic_heart" />
+
+            <ImageView
+                android:id="@+id/itemImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/product_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarView"
+                tools:srcCompat="@drawable/ic_logo" />
+
+            <View
+                android:id="@+id/viewSeparatorTop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:backgroundTint="@color/gray_e5ebe9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemImage" />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/title_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewSeparatorTop"
+                android:layout_marginTop="@dimen/_25sdp"
+                tools:text="Product Title" />
+
+            <TextView
+                android:id="@+id/shortDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="@dimen/padding_small"
+                android:maxLines="1"
+                android:textAppearance="@style/regular_text"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/priceBig"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.435"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleText"
+                android:layout_marginEnd="@dimen/padding_small"
+                tools:text="Product Description" />
+
+            <TextView
+                android:id="@+id/priceBig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="168dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:textColor="@color/price_text_big_035a97"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shortDescription"
+                tools:text="300" />
+
+            <TextView
+                android:id="@+id/priceSmaller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/price_text_small_9cb1bc"
+                android:textSize="@dimen/_9ssp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.046"
+                app:layout_constraintStart_toEndOf="@+id/priceBig"
+                app:layout_constraintTop_toBottomOf="@+id/shortDescription"
+                tools:text="300" />
+
+            <TextView
+                android:id="@+id/informationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:text="@string/information"
+                android:textAppearance="@style/title_text"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewSeparatorBottom" />
+
+            <TextView
+                android:id="@+id/detailedInfoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/regular_text"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/informationText"
+                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:layout_marginStart="@dimen/padding_small"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_52sdp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -65,6 +160,7 @@
             android:text="@string/add_to_cart"
             android:textColor="@color/white"
             android:textSize="@dimen/_11ssp"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buyItem"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -82,6 +178,7 @@
             android:text="@string/buy_now_button"
             android:textColor="@color/white"
             android:textSize="@dimen/_11ssp"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.526"
@@ -89,74 +186,5 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/title_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewSeparatorTop"
-        tools:text="Product Title" />
-
-    <TextView
-        android:id="@+id/shortDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="@dimen/padding_small"
-        android:visibility="visible"
-        android:textAppearance="@style/regular_text"
-        app:layout_constraintBottom_toTopOf="@+id/priceBig"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"
-        tools:text="Product Description" />
-
-    <TextView
-        android:id="@+id/priceBig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textAppearance="@style/regular_text"
-        app:layout_constraintEnd_toStartOf="@+id/priceSmaller"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shortDescription"
-        tools:text="300" />
-
-    <TextView
-        android:id="@+id/priceSmaller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:visibility="visible"
-        android:textAppearance="@style/regular_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/priceBig"
-        app:layout_constraintTop_toBottomOf="@+id/shortDescription"
-        tools:text="300" />
-
-    <TextView
-        android:id="@+id/informationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/information"
-        android:textAppearance="@style/title_text"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewSeparatorBottom" />
-
-    <TextView
-        android:id="@+id/detailedInfoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:textAppearance="@style/regular_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/informationText"
-        tools:text="dhfvyeglfusrlfugski" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

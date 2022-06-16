@@ -1,9 +1,10 @@
-package com.example.wowcart.ui
+package com.example.wowcart.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wowcart.data.repos.ProductsRepository
+import com.example.wowcart.ui.Product
 import com.example.wowcart.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -11,27 +12,39 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
-class ProductFeedViewModel @Inject constructor(private val repository: ProductsRepository) :
+class ProductFavoritesViewModel @Inject constructor(private val repository: ProductsRepository) :
     ViewModel() {
-    private val _status = createListedLiveData<Product>()
-    val status = _status.toLiveData()
+    private val favoritesListener = createListedLiveData<Product>()
+    val favorites = favoritesListener.toLiveData()
+    private val favoritesCountListener = createLiveData<Int>()
+    val favoritesCount = favoritesCountListener.toLiveData()
     private val exceptionListener = MutableLiveData<Exception>()
     val exceptions = exceptionListener.toLiveData()
 
     init {
-        getProducts()
+        getFavorites()
+        getFavoritesCount()
     }
 
-    private fun getProducts() {
+    private fun getFavorites() {
         viewModelScope.launch(Dispatchers.IO) {
             launchOn {
-                repository.getProductsForFeed()
+                repository.getFavorites()
             }.subscribeOver(exceptionListener) {
                 collectLatest {
-                    _status.assignValue(it)
+                    favoritesListener.assignValue(it)
                 }
+            }
+        }
+    }
+
+    private fun getFavoritesCount() {
+        viewModelScope.launch(Dispatchers.IO) {
+            launchOn {
+                repository.getFavoritesCount()
+            }.subscribeOver(exceptionListener) {
+                collectLatest { favoritesCountListener.assignValue(it) }
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wowcart.R
 import com.example.wowcart.databinding.FragmentProductFeedBinding
+import com.example.wowcart.ui.viewModels.ProductFeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,11 +20,6 @@ class ProductFeed : Fragment() {
     private lateinit var binding: FragmentProductFeedBinding
     private val viewModel by viewModels<ProductFeedViewModel>()
     private val adapter = ProductAdapter(this::onItemFavorite, this::onItemClick)
-
-    private fun onItemClick(id: Int) {
-        val directions = ProductFeedDirections.actionProductFeedToProductDetails(id)
-        findNavController().navigate(directions)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +53,11 @@ class ProductFeed : Fragment() {
             true -> viewModel.insert(product.id)
             false -> viewModel.delete(product.id)
         }
+    }
+
+    private fun onItemClick(id: Int) {
+        val directions = ProductFeedDirections.actionProductFeedToProductDetails(id)
+        findNavController().navigate(directions)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

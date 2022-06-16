@@ -3,6 +3,4 @@
     <dimen name="margin_right_standard">@dimen/_32sdp</dimen>
     <dimen name="padding_small">@dimen/_8sdp</dimen>
     <dimen name="padding_regular">@dimen/_16sdp</dimen>
-    <dimen name="title_text">@dimen/_14ssp</dimen>
-    <dimen name="regular_text">@dimen/_9ssp</dimen>
 </resources>

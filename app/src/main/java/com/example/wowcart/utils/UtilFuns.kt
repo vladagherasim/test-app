@@ -18,6 +18,9 @@ suspend fun <T> launchOn(call: suspend () -> T): DataResult<T> {
 fun <T> createListedLiveData(): MutableLiveData<List<T>> {
     return MutableLiveData()
 }
+fun <T> createLiveData(): MutableLiveData<T> {
+    return MutableLiveData()
+}
 
 fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> {
     return this

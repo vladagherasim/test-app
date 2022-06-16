@@ -1,13 +1,15 @@
 package com.example.wowcart.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wowcart.databinding.FragmentFavoritesBinding
+import com.example.wowcart.ui.viewModels.ProductFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,6 +43,17 @@ class Favorites : Fragment() {
                 it.printStackTrace()
             }
         }
+
+        binding.favoritesToolbar.viewBinding.middleButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        viewModel.favoritesCount.observe(viewLifecycleOwner) { result ->
+            binding.favoritesCount.text = result.toString()
+        }
+        viewModel.exceptions.observe(viewLifecycleOwner) {
+            it.printStackTrace()
+        }
     }
 
     private fun onItemFavorite(product: Product, isFav: Boolean) {
@@ -49,8 +62,10 @@ class Favorites : Fragment() {
             false -> viewModel.delete(product.id)
         }
     }
-    private fun onItemClick(id: Int) {
 
+    private fun onItemClick(id: Int) {
+        val directions = FavoritesDirections.actionFavoritesToProductDetails(id)
+        findNavController().navigate(directions)
     }
 
 }

@@ -53,19 +53,23 @@ class ProductsRepository @Inject constructor(
 
     fun getFavorites(): Flow<List<Product>> {
         return productDao.getFavoriteProducts().map {
-            it.map {
+            it.map { product ->
                 Product(
-                    it.id, it.image, it.name, it.details, it.price, true
+                    product.id, product.image, product.name, product.details, product.price, true
                 )
             }
         }
     }
 
-    suspend fun getItemById (id:Int): ProductDTO {
+    suspend fun getItemById(id: Int): ProductDTO {
         return productService.getProductById(id)
     }
 
     suspend fun deleteFavorite(id: Int) {
         productDao.deleteFavorite(id)
+    }
+
+    fun getFavoritesCount(): Flow<Int> {
+        return productDao.getFavoritesCount()
     }
 }

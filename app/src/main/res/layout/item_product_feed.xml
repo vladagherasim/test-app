@@ -15,7 +15,7 @@
         android:contentDescription="@string/product_image_description"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/productDataContainer"
@@ -32,46 +32,46 @@
             android:layout_marginStart="@dimen/padding_small"
             android:fontFamily="@font/open_sans_semi_bold"
             android:gravity="center_vertical"
-            tools:text="300"
             android:textColor="@color/price_text_small_9cb1bc"
             android:textSize="@dimen/_9ssp"
+            app:layout_constraintBottom_toBottomOf="@id/priceLarge"
             app:layout_constraintStart_toEndOf="@+id/priceLarge"
             app:layout_constraintTop_toTopOf="@id/priceLarge"
-            app:layout_constraintBottom_toBottomOf="@id/priceLarge"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck"
+            tools:text="300" />
 
         <TextView
             android:id="@+id/priceLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="300"
             android:layout_marginTop="@dimen/padding_small"
-            android:textSize="@dimen/_13ssp"
-            android:textColor="@color/price_text_big_035a97"
             android:fontFamily="@font/open_sans_semi_bold"
+            android:textColor="@color/price_text_big_035a97"
+            android:textSize="@dimen/_13ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productDescription"/>
+            app:layout_constraintTop_toBottomOf="@+id/productDescription"
+            tools:text="300" />
 
         <TextView
             android:id="@+id/productDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Product description"
-            android:maxLines="1"
             android:layout_marginTop="@dimen/padding_small"
+            android:maxLines="1"
             android:textAppearance="@style/regular_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/productTitle"
+            tools:text="Product description" />
 
         <TextView
             android:id="@+id/productTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Product title"
             android:layout_marginTop="@dimen/padding_regular"
             android:textAppearance="@style/title_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product title" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addToFavoritesButton"
@@ -100,8 +100,8 @@
             android:layout_marginTop="@dimen/padding_small"
             android:layout_marginBottom="@dimen/padding_regular"
             android:backgroundTint="@color/white"
-            android:src="@drawable/ic_add_cart"
             android:contentDescription="@string/product_description"
+            android:src="@drawable/ic_add_cart"
             app:backgroundTint="@color/white"
             app:fabSize="mini"
             app:layout_constraintBottom_toBottomOf="parent"

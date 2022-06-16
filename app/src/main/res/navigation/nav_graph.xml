@@ -9,9 +9,6 @@
         <action
             android:id="@+id/action_productFeed_to_productDetails"
             app:destination="@id/productDetails">
-            <argument
-                android:name="id"
-                app:argType="integer"/>
         </action>
         <action
             android:id="@+id/action_productFeed_to_favorites"
@@ -21,11 +18,15 @@
         android:id="@+id/favorites"
         android:name="com.example.wowcart.ui.Favorites">
         <action
-            android:id="@+id/action_favorites_to_productFeed"
-            app:destination="@id/productFeed"/>
+            android:id="@+id/action_favorites_to_productDetails"
+            app:destination="@id/productDetails" />
     </fragment>
     <fragment
         android:id="@+id/productDetails"
-        android:name="com.example.wowcart.ui.ProductDetails"/>
+        android:name="com.example.wowcart.ui.ProductDetails">
+        <argument
+            android:name="id"
+            app:argType="integer"/>
+    </fragment>
 
 </navigation>
