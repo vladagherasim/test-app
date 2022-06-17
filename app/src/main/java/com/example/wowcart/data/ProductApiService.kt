@@ -9,6 +9,7 @@ interface ProductApiService {
     @GET("/products")
     suspend fun getProducts(): ProductsResponse
 
+    //TODO: code formatting
     @GET("/products/{id}")
     suspend fun getProductById(@Path("id")id: Int): ProductDTO
 }

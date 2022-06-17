@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-
+//TODO: rewatch this extensions to be confident, that you understand them
 suspend fun <T> launchOn(call: suspend () -> T): DataResult<T> {
     return try {
         val result = call()

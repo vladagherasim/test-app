@@ -24,10 +24,11 @@ class ProductFeed : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View? { //TODO: warning
         binding = FragmentProductFeedBinding.inflate(inflater)
         super.onCreate(savedInstanceState)
         binding = FragmentProductFeedBinding.inflate(layoutInflater)
+        //TODO: !!! Binding should be used only after OnViewCreated callback. Check fragment lifecycle.
         binding.apply {
             listButton.isEnabled = false
             listButton.setOnClickListener {
@@ -74,5 +75,7 @@ class ProductFeed : Fragment() {
             }
         }
     }
+
+    //TODO: missing onDestroyView with binding = null. Check official google documentation about ViewBinding in fragments
 
 }

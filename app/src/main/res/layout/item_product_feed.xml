@@ -73,6 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Product title" />
 
+        <!-- TODO: cut shadow from left side, apply paddings -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addToFavoritesButton"
             android:layout_width="wrap_content"

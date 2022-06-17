@@ -37,6 +37,7 @@ class ProductsRepository @Inject constructor(
     }
 
 
+    //TODO: after successful debugging remove unnecessary Logs
     suspend fun insert(productID: Int) {
         Log.d("Product", "product = $productID")
         val product = productService.getProductById(productID)

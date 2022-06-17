@@ -10,8 +10,9 @@ import coil.load
 import com.example.wowcart.R
 import com.example.wowcart.databinding.ItemProductFeedBinding
 
+//TODO: viewHolder value should be inside class.
 private const val ITEM_PRODUCT: Int = 1
-
+//TODO: better to have UI Model in the same file, as its adapter
 class ProductAdapter(
     private val favoriteListener: (Product, Boolean) -> Unit, private val itemClickListener: (Int) -> Unit
 ) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
@@ -43,6 +44,7 @@ class ProductAdapter(
     ) {
         val item = getItem(position) as Product? ?: return
         val myPayload = payloads.firstOrNull() as List<Any>?
+        //TODO: unnecessary logging
         if (position == 0) {
             Log.d("payloads", "total = $payloads")
             Log.d("payloads", myPayload.toString())
@@ -76,7 +78,7 @@ class ItemViewHolder(
         setProductDescription(item.description)
         setProductPrice(item.price)
         setProductFavoriteStatus(item.isFavorite)
-
+        //TODO: unnecessary new line
     }
 
     fun setProductImage(image: String) {
@@ -117,6 +119,7 @@ class ItemViewHolder(
     }
 }
 
+//TODO: this class should be in separate file.
 class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
     override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
         return oldItem.areItemsTheSame(newItem)

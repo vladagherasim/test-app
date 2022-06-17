@@ -15,10 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductFavoritesViewModel @Inject constructor(private val repository: ProductsRepository) :
     ViewModel() {
+    //TODO: make new line after each liveData block
     private val favoritesListener = createListedLiveData<Product>()
     val favorites = favoritesListener.toLiveData()
+    //TODO: new line
     private val favoritesCountListener = createLiveData<Int>()
     val favoritesCount = favoritesCountListener.toLiveData()
+    //TODO: new line
     private val exceptionListener = MutableLiveData<Exception>()
     val exceptions = exceptionListener.toLiveData()
 

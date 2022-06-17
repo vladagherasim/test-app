@@ -16,8 +16,10 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductFeedViewModel @Inject constructor(private val repository: ProductsRepository) :
     ViewModel() {
+    //TODO: new Line
     private val _status = createListedLiveData<Product>()
     val status = _status.toLiveData()
+    //TODO: new Line
     private val exceptionListener = MutableLiveData<Exception>()
     val exceptions = exceptionListener.toLiveData()
 

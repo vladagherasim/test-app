@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductDetails : Fragment() {
+    //TODO: lack of new lines
     private lateinit var binding: FragmentProductDetailsBinding
     private val viewModel by viewModels<ProductDetailsViewModel>()
     private val args: ProductDetailsArgs by navArgs()
@@ -28,7 +29,7 @@ class ProductDetails : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentProductDetailsBinding.inflate(layoutInflater)
         return binding.root
-    }
+    } //TODO: warning
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,10 +55,13 @@ class ProductDetails : Fragment() {
             findNavController().popBackStack()
         }
 
+        //TODO: useless function
         binding.toolbarView.viewBinding.rightButton.setOnClickListener {
 
         }
 
     }
+
+    //TODO: missing onDestroyView with binding = null. Check official google documentation about ViewBinding in fragments
 
 }

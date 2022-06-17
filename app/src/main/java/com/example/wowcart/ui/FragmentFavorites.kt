@@ -20,6 +20,7 @@ class Favorites : Fragment() {
     private val adapter = ProductAdapter(this::onItemFavorite, this::onItemClick)
 
 
+    //TODO: warning
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +37,8 @@ class Favorites : Fragment() {
             favoritesRecyclerView.adapter = adapter
             favoritesRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            //TODO: use default LinearLayoutManager(requireContext()) instead
+            //TODO: in onViewCreated callback you should use requireContext() instead of context
             viewModel.favorites.observe(viewLifecycleOwner) { result ->
                 adapter.submitList(result)
             }
@@ -67,5 +70,7 @@ class Favorites : Fragment() {
         val directions = FavoritesDirections.actionFavoritesToProductDetails(id)
         findNavController().navigate(directions)
     }
+
+    //TODO: missing onDestroyView with binding = null. Check official google documentation about ViewBinding in fragments
 
 }

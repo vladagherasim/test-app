@@ -28,6 +28,7 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+        <!-- TODO: the whole filter block (with text) should be clickable -->
         <ImageButton
             android:id="@+id/filterButton"
             android:layout_width="wrap_content"

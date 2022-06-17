@@ -8,6 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.wowcart.R
 import com.example.wowcart.databinding.ViewToolbarBinding
 
+//TODO: you should not create different toolbars for different screens with such light changes
+//TODO: make it more configurable instead
 class ToolbarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
@@ -49,6 +51,7 @@ class ToolbarView @JvmOverloads constructor(
         }
     }
 
+    //TODO: warning
     private fun getTypedArray(
         context: Context,
         attributeSet: AttributeSet,

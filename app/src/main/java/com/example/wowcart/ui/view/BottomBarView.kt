@@ -40,6 +40,7 @@ class BottomBarView @JvmOverloads constructor(
         }
     }
 
+    //TODO: warning
     private fun getTypedArray(
         context: Context,
         attributeSet: AttributeSet,
