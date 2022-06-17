@@ -1,23 +1,22 @@
 package com.example.wowcart.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.wowcart.R
 import com.example.wowcart.databinding.ItemProductFeedBinding
 
-//TODO: viewHolder value should be inside class.
-private const val ITEM_PRODUCT: Int = 1
-//TODO: better to have UI Model in the same file, as its adapter
+
 class ProductAdapter(
-    private val favoriteListener: (Product, Boolean) -> Unit, private val itemClickListener: (Int) -> Unit
+    private val favoriteListener: (ItemProduct, Boolean) -> Unit,
+    private val itemClickListener: (Int) -> Unit
 ) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
+
+    private val itemProduct: Int = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        if (viewType == ITEM_PRODUCT) {
+        if (viewType == itemProduct) {
             val binding = ItemProductFeedBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -32,7 +31,7 @@ class ProductAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is Product) ITEM_PRODUCT
+        return if (getItem(position) is ItemProduct) itemProduct
         else throw IllegalArgumentException("No such type")
 
     }
@@ -42,13 +41,8 @@ class ProductAdapter(
         position: Int,
         payloads: MutableList<Any>
     ) {
-        val item = getItem(position) as Product? ?: return
-        val myPayload = payloads.firstOrNull() as List<Any>?
-        //TODO: unnecessary logging
-        if (position == 0) {
-            Log.d("payloads", "total = $payloads")
-            Log.d("payloads", myPayload.toString())
-        }
+        val item = getItem(position) as ItemProduct? ?: return
+        val myPayload = payloads.firstOrNull() as List<*>?
         if (myPayload.isNullOrEmpty()) {
             holder.bind(item)
         } else myPayload.forEach {
@@ -66,19 +60,18 @@ class ProductAdapter(
 
 class ItemViewHolder(
     private val binding: ItemProductFeedBinding,
-    private val favoriteListener: (Product, Boolean) -> Unit,
+    private val favoriteListener: (ItemProduct, Boolean) -> Unit,
     private val itemClickListener: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val context = itemView.context
 
-    fun bind(item: Product) {
+    fun bind(item: ItemProduct) {
         setProductImage(item.image)
         setProductTitle(item.title)
         setProductDescription(item.description)
         setProductPrice(item.price)
         setProductFavoriteStatus(item.isFavorite)
-        //TODO: unnecessary new line
     }
 
     fun setProductImage(image: String) {
@@ -108,7 +101,7 @@ class ItemViewHolder(
         binding.addToFavoritesButton.isSelected = isFavorite
     }
 
-    fun setOnClickListeners(item: Product) {
+    fun setOnClickListeners(item: ItemProduct) {
         binding.addToFavoritesButton.setOnClickListener {
             favoriteListener(item, !it.isSelected)
             binding.addToFavoritesButton.isSelected = !it.isSelected
@@ -119,18 +112,56 @@ class ItemViewHolder(
     }
 }
 
-//TODO: this class should be in separate file.
-class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
-    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.areItemsTheSame(newItem)
+data class ItemProduct(
+    val id: Int,
+    val image: String,
+    val title: String,
+    val description: String,
+    val price: Double,
+    val isFavorite: Boolean
+) : Item {
+    override fun areItemsTheSame(other: Any): Boolean {
+        return other is ItemProduct && id == other.id
     }
 
-    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.areContentsTheSame(newItem)
+    override fun areContentsTheSame(other: Any): Boolean {
+        return other is ItemProduct
+                && this.title == other.title
+                && this.description == other.description
+                && this.price == other.price
+                && this.image == other.image
+                && this.isFavorite == other.isFavorite
     }
 
-    override fun getChangePayload(oldItem: Item, newItem: Item): Any? {
-        return oldItem.getChangePayload(newItem)
+    override fun getChangePayload(other: Any): MutableList<Payloads> {
+        return mutableListOf<Payloads>().apply {
+            if (other is ItemProduct) {
+                if (other.title != title) {
+                    add(ProductPayloads.TitleChanged(other.title))
+                }
+                if (other.image != image) {
+                    add(ProductPayloads.ImageChanged(other.image))
+                }
+                if (other.price != price) {
+                    add(ProductPayloads.PriceChanged(other.price))
+                }
+                if (other.description != description) {
+                    add(ProductPayloads.DescriptionChanged(other.description))
+                }
+                if (other.isFavorite != isFavorite) {
+                    add(ProductPayloads.FavoriteStatusChanged(other.isFavorite))
+                }
+            }
+        }
     }
+}
 
+interface Payloads
+
+sealed class ProductPayloads : Payloads {
+    data class TitleChanged(val newTitle: String) : ProductPayloads()
+    data class DescriptionChanged(val newDescription: String) : ProductPayloads()
+    data class PriceChanged(val newPrice: Double) : ProductPayloads()
+    data class ImageChanged(val newImage: String) : ProductPayloads()
+    data class FavoriteStatusChanged(val newFavoriteStatus: Boolean) : ProductPayloads()
 }

@@ -15,19 +15,18 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class Favorites : Fragment() {
 
-    private lateinit var binding: FragmentFavoritesBinding
+    private var _binding: FragmentFavoritesBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<ProductFavoritesViewModel>()
     private val adapter = ProductAdapter(this::onItemFavorite, this::onItemClick)
 
-
-    //TODO: warning
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentFavoritesBinding.inflate(inflater)
+    ): View {
+        _binding = FragmentFavoritesBinding.inflate(inflater)
         super.onCreate(savedInstanceState)
-        binding = FragmentFavoritesBinding.inflate(layoutInflater)
+        _binding = FragmentFavoritesBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -36,9 +35,8 @@ class Favorites : Fragment() {
         binding.apply {
             favoritesRecyclerView.adapter = adapter
             favoritesRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            //TODO: use default LinearLayoutManager(requireContext()) instead
-            //TODO: in onViewCreated callback you should use requireContext() instead of context
+                LinearLayoutManager(requireContext())
+
             viewModel.favorites.observe(viewLifecycleOwner) { result ->
                 adapter.submitList(result)
             }
@@ -59,10 +57,10 @@ class Favorites : Fragment() {
         }
     }
 
-    private fun onItemFavorite(product: Product, isFav: Boolean) {
+    private fun onItemFavorite(itemProduct: ItemProduct, isFav: Boolean) {
         when (isFav) {
-            true -> viewModel.insert(product.id)
-            false -> viewModel.delete(product.id)
+            true -> viewModel.insert(itemProduct.id)
+            false -> viewModel.delete(itemProduct.id)
         }
     }
 
@@ -71,6 +69,9 @@ class Favorites : Fragment() {
         findNavController().navigate(directions)
     }
 
-    //TODO: missing onDestroyView with binding = null. Check official google documentation about ViewBinding in fragments
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
 }

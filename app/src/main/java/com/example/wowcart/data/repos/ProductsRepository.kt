@@ -1,11 +1,10 @@
 package com.example.wowcart.data.repos
 
-import android.util.Log
 import com.example.wowcart.data.ProductApiService
 import com.example.wowcart.data.ProductDao
-import com.example.wowcart.data.ProductEntity
+import com.example.wowcart.data.Product
 import com.example.wowcart.data.dto.ProductDTO
-import com.example.wowcart.ui.Product
+import com.example.wowcart.ui.ItemProduct
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
@@ -17,14 +16,14 @@ class ProductsRepository @Inject constructor(
     private val productDao: ProductDao
 ) {
 
-    suspend fun getProductsForFeed(): Flow<List<Product>> {
+    suspend fun getProductsForFeed(): Flow<List<ItemProduct>> {
         return combine(
             flowOf(productService.getProducts()),
             productDao.getFavoriteProducts()
         ) { remote, db ->
             val favIds = db.map { it.id }
             remote.results.map {
-                Product(
+                ItemProduct(
                     it.id,
                     it.mainImage,
                     it.name,
@@ -36,12 +35,9 @@ class ProductsRepository @Inject constructor(
         }
     }
 
-
-    //TODO: after successful debugging remove unnecessary Logs
     suspend fun insert(productID: Int) {
-        Log.d("Product", "product = $productID")
         val product = productService.getProductById(productID)
-        val productEntity = ProductEntity(
+        val productEntity = Product(
             product.id,
             product.name,
             product.details,
@@ -52,10 +48,10 @@ class ProductsRepository @Inject constructor(
         productDao.insert(productEntity)
     }
 
-    fun getFavorites(): Flow<List<Product>> {
+    fun getFavorites(): Flow<List<ItemProduct>> {
         return productDao.getFavoriteProducts().map {
             it.map { product ->
-                Product(
+                ItemProduct(
                     product.id, product.image, product.name, product.details, product.price, true
                 )
             }
@@ -72,5 +68,11 @@ class ProductsRepository @Inject constructor(
 
     fun getFavoritesCount(): Flow<Int> {
         return productDao.getFavoritesCount()
+    }
+
+    fun getItemInFavorites(id: Int): Flow<Boolean> {
+        return productDao.getItemInFavorites(id).map {
+            it == 1
+        }
     }
 }

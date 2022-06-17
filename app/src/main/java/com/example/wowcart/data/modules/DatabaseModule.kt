@@ -24,8 +24,7 @@ object DatabaseModule {
             ProductDatabase.DATABASE_NAME
         ).build()
 
-    //TODO: keep in mind to format your code properly after any change (alt + cmd + L)
     @Provides
     @Singleton
-     fun provideDao(database: ProductDatabase): ProductDao = database.productDao()
+    fun provideDao(database: ProductDatabase): ProductDao = database.productDao()
 }

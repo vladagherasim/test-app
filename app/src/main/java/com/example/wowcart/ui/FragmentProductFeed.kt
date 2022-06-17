@@ -17,42 +17,26 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProductFeed : Fragment() {
 
-    private lateinit var binding: FragmentProductFeedBinding
+    private var _binding: FragmentProductFeedBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<ProductFeedViewModel>()
     private val adapter = ProductAdapter(this::onItemFavorite, this::onItemClick)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? { //TODO: warning
-        binding = FragmentProductFeedBinding.inflate(inflater)
+    ): View {
+        _binding = FragmentProductFeedBinding.inflate(inflater)
         super.onCreate(savedInstanceState)
-        binding = FragmentProductFeedBinding.inflate(layoutInflater)
-        //TODO: !!! Binding should be used only after OnViewCreated callback. Check fragment lifecycle.
-        binding.apply {
-            listButton.isEnabled = false
-            listButton.setOnClickListener {
-                listButton.isEnabled = !listButton.isEnabled
-                gridButton.isEnabled = !listButton.isEnabled
-            }
-            gridButton.setOnClickListener {
-                gridButton.isEnabled = !gridButton.isEnabled
-                listButton.isEnabled = !gridButton.isEnabled
-            }
-            toolbarHolder.viewBinding.rightButton.setOnClickListener {
-                findNavController().navigate(R.id.action_productFeed_to_favorites)
-            }
-            bottomBarView.setOnClickListener {
-                Toast.makeText(context, "Cart button clicked", Toast.LENGTH_SHORT).show()
-            }
-        }
+        _binding = FragmentProductFeedBinding.inflate(layoutInflater)
+
         return binding.root
     }
 
-    private fun onItemFavorite(product: Product, isFav: Boolean) {
+    private fun onItemFavorite(itemProduct: ItemProduct, isFav: Boolean) {
         when (isFav) {
-            true -> viewModel.insert(product.id)
-            false -> viewModel.delete(product.id)
+            true -> viewModel.insert(itemProduct.id)
+            false -> viewModel.delete(itemProduct.id)
         }
     }
 
@@ -74,8 +58,27 @@ class ProductFeed : Fragment() {
                 it.printStackTrace()
             }
         }
+        binding.apply {
+            listButton.isEnabled = false
+            listButton.setOnClickListener {
+                listButton.isEnabled = !listButton.isEnabled
+                gridButton.isEnabled = !listButton.isEnabled
+            }
+            gridButton.setOnClickListener {
+                gridButton.isEnabled = !gridButton.isEnabled
+                listButton.isEnabled = !gridButton.isEnabled
+            }
+            toolbarHolder.viewBinding.rightButton.setOnClickListener {
+                findNavController().navigate(R.id.action_productFeed_to_favorites)
+            }
+            bottomBarView.setOnClickListener {
+                Toast.makeText(context, "Cart button clicked", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
-    //TODO: missing onDestroyView with binding = null. Check official google documentation about ViewBinding in fragments
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

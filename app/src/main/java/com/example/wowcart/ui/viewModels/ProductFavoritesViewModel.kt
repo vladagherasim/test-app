@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wowcart.data.repos.ProductsRepository
-import com.example.wowcart.ui.Product
+import com.example.wowcart.ui.ItemProduct
 import com.example.wowcart.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,13 +15,12 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductFavoritesViewModel @Inject constructor(private val repository: ProductsRepository) :
     ViewModel() {
-    //TODO: make new line after each liveData block
-    private val favoritesListener = createListedLiveData<Product>()
+    private val favoritesListener = createListedLiveData<ItemProduct>()
     val favorites = favoritesListener.toLiveData()
-    //TODO: new line
+
     private val favoritesCountListener = createLiveData<Int>()
     val favoritesCount = favoritesCountListener.toLiveData()
-    //TODO: new line
+
     private val exceptionListener = MutableLiveData<Exception>()
     val exceptions = exceptionListener.toLiveData()
 

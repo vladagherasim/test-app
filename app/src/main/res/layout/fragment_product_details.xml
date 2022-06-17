@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--TODO: make layout invisible until it has no data -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:toolbarCenterImage="@drawable/ic_dots"
                 app:toolbarLeftImage="@drawable/ic_user"
-                app:toolbarRightImage="@drawable/ic_heart" />
+                app:toolbarRightImage="@drawable/selector_favorite_item_details" />
 
             <ImageView
                 android:id="@+id/itemImage"
@@ -135,7 +134,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/informationText"
                 android:layout_marginTop="@dimen/padding_small"
                 android:layout_marginEnd="@dimen/padding_small"
-                android:layout_marginStart="@dimen/padding_small"/>
+                android:layout_marginStart="@dimen/padding_small"
+                android:paddingBottom="@dimen/_50sdp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

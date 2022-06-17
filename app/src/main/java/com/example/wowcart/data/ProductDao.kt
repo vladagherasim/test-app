@@ -8,17 +8,20 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
-    //TODO: keep one new line after class declaration
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(product: ProductEntity)
+    suspend fun insert(product: Product)
 
     @Query("SELECT * FROM products_table")
-    fun getFavoriteProducts(): Flow<List<ProductEntity>>
+    fun getFavoriteProducts(): Flow<List<Product>>
 
     @Query("DELETE FROM products_table WHERE id =:id")
     suspend fun deleteFavorite(id: Int)
 
     @Query("SELECT COUNT(*) FROM products_table")
     fun getFavoritesCount(): Flow<Int>
-    //TODO: keep one new line after class body end
+
+    @Query("SELECT COUNT(*) FROM products_table WHERE id =:id")
+    fun getItemInFavorites(id:Int): Flow<Int>
+
 }

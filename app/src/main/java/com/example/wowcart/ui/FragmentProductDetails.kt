@@ -1,10 +1,11 @@
 package com.example.wowcart.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,24 +18,28 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductDetails : Fragment() {
-    //TODO: lack of new lines
-    private lateinit var binding: FragmentProductDetailsBinding
+
+    private var _binding: FragmentProductDetailsBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<ProductDetailsViewModel>()
     private val args: ProductDetailsArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentProductDetailsBinding.inflate(inflater)
+    ): View {
+        _binding = FragmentProductDetailsBinding.inflate(inflater)
         super.onCreate(savedInstanceState)
-        binding = FragmentProductDetailsBinding.inflate(layoutInflater)
+        _binding = FragmentProductDetailsBinding.inflate(layoutInflater)
         return binding.root
-    } //TODO: warning
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
-        Log.d("ID", "id is $id")
+
+        binding.informationText.isVisible = false
+        binding.toolbarView.rightIcon.isVisible = false
+
         viewModel.getItemById(id)
         viewModel.item.observe(viewLifecycleOwner) { result ->
             binding.apply {
@@ -44,24 +49,39 @@ class ProductDetails : Fragment() {
                 priceSmaller.text = getString(R.string.price_holder, result.price.toString())
                 detailedInfoText.text = result.details
                 itemImage.load(result.mainImage)
+                informationText.isVisible = true
+                toolbarView.rightIcon.isVisible = true
+            }
 
+            viewModel.getItemInFavorites(id)
+            binding.toolbarView.viewBinding.rightButton.setOnClickListener {
+                binding.toolbarView.viewBinding.rightButton.apply {
+                    isSelected = !isSelected
+                    if (isSelected) {
+                        viewModel.insert(id)
+                    } else {
+                        viewModel.delete(id)
+                    }
+                }
+            }
+            viewModel.isFavorite.observe(viewLifecycleOwner) {
+                binding.apply {
+                    toolbarView.rightIcon.isSelected = it
+                }
+            }
+            viewModel.exceptions.observe(viewLifecycleOwner) {
+                it.printStackTrace()
+            }
+
+            binding.toolbarView.viewBinding.middleButton.setOnClickListener {
+                findNavController().popBackStack()
             }
         }
-        viewModel.exceptions.observe(viewLifecycleOwner) {
-            it.printStackTrace()
-        }
-
-        binding.toolbarView.viewBinding.middleButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        //TODO: useless function
-        binding.toolbarView.viewBinding.rightButton.setOnClickListener {
-
-        }
-
     }
 
-    //TODO: missing onDestroyView with binding = null. Check official google documentation about ViewBinding in fragments
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

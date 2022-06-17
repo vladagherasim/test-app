@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wowcart.data.repos.ProductsRepository
-import com.example.wowcart.ui.Product
+import com.example.wowcart.ui.ItemProduct
 import com.example.wowcart.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,10 +16,10 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductFeedViewModel @Inject constructor(private val repository: ProductsRepository) :
     ViewModel() {
-    //TODO: new Line
-    private val _status = createListedLiveData<Product>()
+
+    private val _status = createListedLiveData<ItemProduct>()
     val status = _status.toLiveData()
-    //TODO: new Line
+
     private val exceptionListener = MutableLiveData<Exception>()
     val exceptions = exceptionListener.toLiveData()
 

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.wowcart.R
 import com.example.wowcart.databinding.ViewBottomBarBinding
@@ -25,7 +24,7 @@ class BottomBarView @JvmOverloads constructor(
     }
 
     private fun initAttributes(context: Context, attrs: AttributeSet) {
-        val attr: TypedArray = getTypedArray(context, attrs, R.styleable.BottomBar) ?: return
+        val attr: TypedArray = getTypedArray(context, attrs, R.styleable.BottomBar)
 
         viewBinding.apply {
             cartButtonInBottomBar.setImageResource(
@@ -40,12 +39,11 @@ class BottomBarView @JvmOverloads constructor(
         }
     }
 
-    //TODO: warning
     private fun getTypedArray(
         context: Context,
         attributeSet: AttributeSet,
         attr: IntArray
-    ): TypedArray? {
+    ): TypedArray {
         return context.obtainStyledAttributes(attributeSet, attr, 0, 0)
     }
 }
