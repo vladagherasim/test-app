@@ -1,10 +1,15 @@
 package com.example.wowcart.data.repos
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.wowcart.data.ProductApiService
 import com.example.wowcart.data.ProductDao
 import com.example.wowcart.data.Product
 import com.example.wowcart.data.dto.ProductDTO
 import com.example.wowcart.ui.ItemProduct
+import com.example.wowcart.ui.pagingSources.ProductPagingSource
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
@@ -15,6 +20,11 @@ class ProductsRepository @Inject constructor(
     private val productService: ProductApiService,
     private val productDao: ProductDao
 ) {
+
+    private fun productPagingSource(coroutineScope: CoroutineScope) = Pager(
+        config = PagingConfig(pageSize = 10),
+        pagingSourceFactory = { ProductPagingSource(productService)}
+    ).flow.cachedIn(coroutineScope)
 
     suspend fun getProductsForFeed(): Flow<List<ItemProduct>> {
         return combine(

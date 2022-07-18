@@ -2,6 +2,7 @@ package com.example.wowcart.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -12,8 +13,7 @@ import com.example.wowcart.databinding.ItemProductFeedBinding
 class ProductAdapter(
     private val favoriteListener: (ItemProduct, Boolean) -> Unit,
     private val itemClickListener: (Int) -> Unit
-) : ListAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
-
+) : PagingDataAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
     private val itemProduct: Int = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         if (viewType == itemProduct) {
@@ -63,7 +63,6 @@ class ItemViewHolder(
     private val favoriteListener: (ItemProduct, Boolean) -> Unit,
     private val itemClickListener: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-
     private val context = itemView.context
 
     fun bind(item: ItemProduct) {

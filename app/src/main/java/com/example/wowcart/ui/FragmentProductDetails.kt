@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coil.load
-import com.example.wowcart.R
 import com.example.wowcart.databinding.FragmentProductDetailsBinding
 import com.example.wowcart.ui.viewModels.ProductDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +33,7 @@ class ProductDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
 
-        binding.informationText.isVisible = false
+        /*binding.informationText.isVisible = false
         binding.toolbarView.rightIcon.isVisible = false
 
         viewModel.getItemById(id)
@@ -51,31 +47,30 @@ class ProductDetails : Fragment() {
                 itemImage.load(result.mainImage)
                 informationText.isVisible = true
                 toolbarView.rightIcon.isVisible = true
-            }
+            }*/
 
-            viewModel.getItemInFavorites(id)
-            binding.toolbarView.viewBinding.rightButton.setOnClickListener {
-                binding.toolbarView.viewBinding.rightButton.apply {
-                    isSelected = !isSelected
-                    if (isSelected) {
-                        viewModel.insert(id)
-                    } else {
-                        viewModel.delete(id)
-                    }
+        viewModel.getItemInFavorites(id)
+        binding.toolbarView.viewBinding.rightButton.setOnClickListener {
+            binding.toolbarView.viewBinding.rightButton.apply {
+                isSelected = !isSelected
+                if (isSelected) {
+                    viewModel.insert(id)
+                } else {
+                    viewModel.delete(id)
                 }
             }
-            viewModel.isFavorite.observe(viewLifecycleOwner) {
-                binding.apply {
-                    toolbarView.rightIcon.isSelected = it
-                }
+        }
+        viewModel.isFavorite.observe(viewLifecycleOwner) {
+            binding.apply {
+                toolbarView.rightIcon.isSelected = it
             }
-            viewModel.exceptions.observe(viewLifecycleOwner) {
-                it.printStackTrace()
-            }
+        }
+        viewModel.exceptions.observe(viewLifecycleOwner) {
+            it.printStackTrace()
+        }
 
-            binding.toolbarView.viewBinding.middleButton.setOnClickListener {
-                findNavController().popBackStack()
-            }
+        binding.toolbarView.viewBinding.middleButton.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -85,3 +80,5 @@ class ProductDetails : Fragment() {
     }
 
 }
+
+
