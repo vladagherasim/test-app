@@ -110,6 +110,16 @@
             app:layout_constraintTop_toBottomOf="@+id/priceLarge"
             app:tint="@color/dark_182867"
             tools:ignore="SpeakableTextPresentCheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/viewSeparatorBottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/gray_e5ebe9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productDataContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

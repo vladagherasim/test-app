@@ -28,12 +28,18 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
-        <!-- TODO: the whole filter block (with text) should be clickable -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filterOption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent">
         <ImageButton
             android:id="@+id/filterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_small"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/product_description"
             android:minHeight="48dp"
@@ -54,6 +60,7 @@
             app:layout_constraintStart_toEndOf="@id/filterButton"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/gridButton"

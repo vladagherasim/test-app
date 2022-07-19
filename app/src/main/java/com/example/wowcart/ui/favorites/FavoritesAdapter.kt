@@ -1,32 +1,35 @@
-package com.example.wowcart.ui
+package com.example.wowcart.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.wowcart.R
 import com.example.wowcart.databinding.ItemProductFeedBinding
+import com.example.wowcart.ui.Item
+import com.example.wowcart.ui.ItemDiffCallback
+import com.example.wowcart.ui.feed.ItemProduct
+import com.example.wowcart.ui.feed.ProductPayloads
 
 
-class ProductAdapter(
+class FavoritesAdapter(
     private val favoriteListener: (ItemProduct, Boolean) -> Unit,
     private val itemClickListener: (Int) -> Unit
-) : PagingDataAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
+) : ListAdapter<Item, FavoriteViewHolder>(ItemDiffCallback()) {
     private val itemProduct: Int = 1
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         if (viewType == itemProduct) {
             val binding = ItemProductFeedBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            return ItemViewHolder(binding, favoriteListener, itemClickListener)
+            return FavoriteViewHolder(binding, favoriteListener, itemClickListener)
         } else throw IllegalArgumentException("No such type")
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         onBindViewHolder(holder, position, mutableListOf())
     }
 
@@ -37,7 +40,7 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: ItemViewHolder,
+        holder: FavoriteViewHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
@@ -58,7 +61,7 @@ class ProductAdapter(
     }
 }
 
-class ItemViewHolder(
+class FavoriteViewHolder(
     private val binding: ItemProductFeedBinding,
     private val favoriteListener: (ItemProduct, Boolean) -> Unit,
     private val itemClickListener: (Int) -> Unit
@@ -111,56 +114,6 @@ class ItemViewHolder(
     }
 }
 
-data class ItemProduct(
-    val id: Int,
-    val image: String,
-    val title: String,
-    val description: String,
-    val price: Double,
-    val isFavorite: Boolean
-) : Item {
-    override fun areItemsTheSame(other: Any): Boolean {
-        return other is ItemProduct && id == other.id
-    }
 
-    override fun areContentsTheSame(other: Any): Boolean {
-        return other is ItemProduct
-                && this.title == other.title
-                && this.description == other.description
-                && this.price == other.price
-                && this.image == other.image
-                && this.isFavorite == other.isFavorite
-    }
 
-    override fun getChangePayload(other: Any): MutableList<Payloads> {
-        return mutableListOf<Payloads>().apply {
-            if (other is ItemProduct) {
-                if (other.title != title) {
-                    add(ProductPayloads.TitleChanged(other.title))
-                }
-                if (other.image != image) {
-                    add(ProductPayloads.ImageChanged(other.image))
-                }
-                if (other.price != price) {
-                    add(ProductPayloads.PriceChanged(other.price))
-                }
-                if (other.description != description) {
-                    add(ProductPayloads.DescriptionChanged(other.description))
-                }
-                if (other.isFavorite != isFavorite) {
-                    add(ProductPayloads.FavoriteStatusChanged(other.isFavorite))
-                }
-            }
-        }
-    }
-}
 
-interface Payloads
-
-sealed class ProductPayloads : Payloads {
-    data class TitleChanged(val newTitle: String) : ProductPayloads()
-    data class DescriptionChanged(val newDescription: String) : ProductPayloads()
-    data class PriceChanged(val newPrice: Double) : ProductPayloads()
-    data class ImageChanged(val newImage: String) : ProductPayloads()
-    data class FavoriteStatusChanged(val newFavoriteStatus: Boolean) : ProductPayloads()
-}

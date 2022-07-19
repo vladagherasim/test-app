@@ -1,4 +1,4 @@
-package com.example.wowcart.ui.pagingSources
+package com.example.wowcart.domain.pagingSources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -16,14 +16,16 @@ class ProductPagingSource(private val service: ProductApiService) :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductDTO> {
         val start = params.key ?: 0
-        val response = service.getProducts()
+        val response = service.getProducts(params.key ?: 1)
         return LoadResult.Page(
             data = response.results,
             prevKey = when (start) {
                 0 -> null
                 else -> response.currentPage - 1
             },
-            nextKey = response.currentPage + 1
+            nextKey = if (response.currentPage + 1 <= response.totalPages)
+                response.currentPage + 1
+            else null
         )
     }
 

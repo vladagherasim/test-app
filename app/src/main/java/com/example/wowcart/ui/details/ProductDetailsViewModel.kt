@@ -1,10 +1,10 @@
-package com.example.wowcart.ui.viewModels
+package com.example.wowcart.ui.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.wowcart.data.repos.ProductsRepository
-import com.example.wowcart.ui.ItemProduct
+import com.example.wowcart.ui.Item
 import com.example.wowcart.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,40 +13,36 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductFavoritesViewModel @Inject constructor(private val repository: ProductsRepository) :
+class ProductDetailsViewModel @Inject constructor(private val repository: ProductsRepository) :
     ViewModel() {
-    private val favoritesListener = createListedLiveData<ItemProduct>()
-    val favorites = favoritesListener.toLiveData()
-
-    private val favoritesCountListener = createLiveData<Int>()
-    val favoritesCount = favoritesCountListener.toLiveData()
+    private val itemListener = createListedLiveData<Item>()
+    val item = itemListener.toLiveData()
 
     private val exceptionListener = MutableLiveData<Exception>()
     val exceptions = exceptionListener.toLiveData()
 
-    init {
-        getFavorites()
-        getFavoritesCount()
-    }
+    private val isFavoriteListener = createLiveData<Boolean>()
+    val isFavorite = isFavoriteListener.toLiveData()
 
-    private fun getFavorites() {
+
+    fun getItemById(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             launchOn {
-                repository.getFavorites()
+                repository.getItemById(id)
             }.subscribeOver(exceptionListener) {
-                collectLatest {
-                    favoritesListener.assignValue(it)
-                }
+                itemListener.assignValue(this)
             }
         }
     }
 
-    private fun getFavoritesCount() {
+    fun getItemInFavorites(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             launchOn {
-                repository.getFavoritesCount()
+                repository.getItemInFavorites(id)
             }.subscribeOver(exceptionListener) {
-                collectLatest { favoritesCountListener.assignValue(it) }
+                collectLatest {
+                    isFavoriteListener.assignValue(it)
+                }
             }
         }
     }
@@ -58,4 +54,6 @@ class ProductFavoritesViewModel @Inject constructor(private val repository: Prod
     fun delete(productID: Int) {
         viewModelScope.launch { repository.deleteFavorite(productID) }
     }
+
 }
+

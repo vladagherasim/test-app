@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_regular"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/padding_regular"
+        android:gravity="center"
         android:textAppearance="@style/title_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/_25sdp"
         tools:text="Product Title" />
 
     <TextView
         android:id="@+id/shortDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_regular"
         android:layout_marginTop="@dimen/padding_small"
+        android:layout_marginEnd="@dimen/padding_regular"
+        android:gravity="center"
         android:maxLines="1"
         android:textAppearance="@style/regular_text"
         android:visibility="visible"
@@ -33,26 +42,29 @@
         android:id="@+id/priceBig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/priceSmaller"
         android:fontFamily="@font/open_sans_semi_bold"
         android:textColor="@color/price_text_big_035a97"
         android:textSize="@dimen/_13ssp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@+id/shortDescription"
+        tools:layout_editor_absoluteX="177dp"
         tools:text="300" />
 
     <TextView
         android:id="@+id/priceSmaller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_small"
         android:layout_marginTop="20dp"
         android:textColor="@color/price_text_small_9cb1bc"
         android:textSize="@dimen/_9ssp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toEndOf="@+id/priceBig"
+        app:layout_constraintStart_toEndOf="@id/priceBig"
         app:layout_constraintTop_toBottomOf="@+id/shortDescription"
         tools:text="300" />
 
@@ -60,8 +72,8 @@
         android:id="@+id/viewSeparatorBottom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/padding_small"
-        android:backgroundTint="@color/gray_e5ebe9"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/gray_e5ebe9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

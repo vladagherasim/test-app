@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wowcart.databinding.FragmentFavoritesBinding
-import com.example.wowcart.ui.viewModels.ProductFavoritesViewModel
+import com.example.wowcart.ui.favorites.FavoritesAdapter
+import com.example.wowcart.ui.favorites.ProductFavoritesViewModel
+import com.example.wowcart.ui.feed.ItemProduct
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +20,7 @@ class Favorites : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<ProductFavoritesViewModel>()
-    private val adapter = ProductAdapter(this::onItemFavorite, this::onItemClick)
+    private val adapter = FavoritesAdapter(this::onItemFavorite, this::onItemClick)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

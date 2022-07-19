@@ -1,11 +1,11 @@
 package com.example.wowcart.utils
 
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-//TODO: re-watch this extensions to be confident, that you understand them
 suspend fun <T> launchOn(call: suspend () -> T): DataResult<T> {
     return try {
         val result = call()
@@ -31,3 +31,17 @@ suspend fun <T> MutableLiveData<T>.assignValue(value: T) {
         this@assignValue.value = value
     }
 }
+
+inline fun LifecycleCoroutineScope.safeLaunch(
+    onError: (Exception) -> Unit,
+    crossinline action: suspend () -> Unit
+) {
+    try {
+        launchWhenStarted {
+            action()
+        }
+    } catch (e: Exception) {
+        onError(e)
+    }
+}
+
