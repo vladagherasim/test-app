@@ -5,7 +5,7 @@
     app:startDestination="@id/productFeed">
     <fragment
         android:id="@+id/productFeed"
-        android:name="com.example.wowcart.ui.ProductFeed">
+        android:name="com.example.wowcart.presentation.feed.ProductFeed">
         <action
             android:id="@+id/action_productFeed_to_productDetails"
             app:destination="@id/productDetails">
@@ -16,14 +16,14 @@
     </fragment>
     <fragment
         android:id="@+id/favorites"
-        android:name="com.example.wowcart.ui.Favorites">
+        android:name="com.example.wowcart.presentation.favorites.Favorites">
         <action
             android:id="@+id/action_favorites_to_productDetails"
             app:destination="@id/productDetails" />
     </fragment>
     <fragment
         android:id="@+id/productDetails"
-        android:name="com.example.wowcart.ui.ProductDetails">
+        android:name="com.example.wowcart.presentation.details.ProductDetails">
         <argument
             android:name="id"
             app:argType="integer"/>

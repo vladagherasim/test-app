@@ -3,6 +3,8 @@ package com.example.wowcart.utils
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavOptions
+import com.example.wowcart.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,6 +20,7 @@ suspend fun <T> launchOn(call: suspend () -> T): DataResult<T> {
 fun <T> createListedLiveData(): MutableLiveData<List<T>> {
     return MutableLiveData()
 }
+
 fun <T> createLiveData(): MutableLiveData<T> {
     return MutableLiveData()
 }
@@ -43,5 +46,14 @@ inline fun LifecycleCoroutineScope.safeLaunch(
     } catch (e: Exception) {
         onError(e)
     }
+}
+
+fun getNavOptions(): NavOptions {
+    return NavOptions.Builder()
+        .setEnterAnim(R.anim.slide_left)
+        .setExitAnim(R.anim.wait)
+        .setPopEnterAnim(R.anim.wait)
+        .setPopExitAnim(R.anim.slide_right)
+        .build()
 }
 

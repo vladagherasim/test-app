@@ -1,26 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?><!-- TODO: multiple design issues -->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Favorites">
+    tools:context=".presentation.favorites.Favorites">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favoritesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/padding_small"
-        android:layout_marginTop="@dimen/padding_small"
-        android:layout_marginEnd="@dimen/padding_small"
         android:clipToPadding="false"
+        android:layout_marginTop="@dimen/padding_small"
         android:paddingBottom="@dimen/_50sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/favoritesLayout" />
 
-    <com.example.wowcart.ui.view.ToolbarView
+    <View
+        android:id="@+id/viewSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/gray_e5ebe9"
+        android:layout_marginStart="@dimen/padding_small"
+        android:layout_marginEnd="@dimen/padding_small"
+        android:layout_marginTop="@dimen/padding_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favoritesLayout" />
+
+    <com.example.wowcart.presentation.ui.view.ToolbarView
         android:id="@+id/favoritesToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +43,7 @@
         app:toolbarLeftImage="@drawable/ic_user"
         app:toolbarRightImage="@drawable/ic_favorites_selected" />
 
-    <com.example.wowcart.ui.view.BottomBarView
+    <com.example.wowcart.presentation.ui.view.BottomBarView
         android:id="@+id/bottomBarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,13 +57,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:middleText="@string/my_cart">
 
-    </com.example.wowcart.ui.view.BottomBarView>
+    </com.example.wowcart.presentation.ui.view.BottomBarView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favoritesLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_small"
+        android:layout_marginBottom="@dimen/padding_small"
+        app:layout_constraintBottom_toTopOf="@id/viewSeparator"
         app:layout_constraintTop_toBottomOf="@+id/favoritesToolbar"
         tools:layout_editor_absoluteX="36dp">
 

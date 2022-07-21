@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../private/var/folders/h1/t75vvl9j7p3byyp5dt47qp000000gq/T/drawable-temp/fake_of_selector_animated.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/anim_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_add_cart.xml" value="0.2705" />
         <entry key="app/src/main/res/drawable/ic_add_to_cart.xml" value="0.2585" />
         <entry key="app/src/main/res/drawable/ic_chevron_down.xml" value="0.265" />
@@ -25,8 +27,8 @@
         <entry key="app/src/main/res/drawable/shape_add_to_cart_background.xml" value="0.265" />
         <entry key="app/src/main/res/drawable/shape_button_background_dark.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_product_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_product_feed.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_description.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/item_description_text.xml" value="0.34010416666666665" />
@@ -34,6 +36,7 @@
         <entry key="app/src/main/res/layout/item_information_text.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/item_middle_text.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_product_feed.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_product_feed_grid.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_title_and_price.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/product_recyclerview_item.xml" value="0.6301703163017032" />
         <entry key="app/src/main/res/layout/view_bottom_bar.xml" value="0.4036458333333333" />
