@@ -2,43 +2,51 @@ package com.example.wowcart.presentation.feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.example.wowcart.R
 import com.example.wowcart.databinding.ItemProductFeedBinding
-import com.example.wowcart.utils.common.Item
+import com.example.wowcart.databinding.ItemProductFeedGridBinding
 import com.example.wowcart.presentation.ui.ItemDiffCallback
+import com.example.wowcart.utils.common.Item
 
 
 class ProductAdapter(
     private val favoriteListener: (ItemProduct, Boolean) -> Unit,
-    private val itemClickListener: (Int) -> Unit
-) : PagingDataAdapter<Item, ItemViewHolder>(ItemDiffCallback()) {
-    private val itemProduct: Int = 1
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        if (viewType == itemProduct) {
+    private val itemClickListener: (Int) -> Unit,
+    fragment: Fragment
+) : PagingDataAdapter<Item, ProductViewHolder>(ItemDiffCallback()) {
+
+    private val parentInterface: ProductFragment = fragment as ProductFragment
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        return if (viewType == 1) {
             val binding = ItemProductFeedBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            return ItemViewHolder(binding, favoriteListener, itemClickListener)
-        } else throw IllegalArgumentException("No such type")
+            ProductListViewHolder(binding, favoriteListener, itemClickListener)
+        } else {
+            val binding = ItemProductFeedGridBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            ProductGridViewHolder(binding, favoriteListener, itemClickListener)
+        }
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         onBindViewHolder(holder, position, mutableListOf())
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) is ItemProduct) itemProduct
-        else throw IllegalArgumentException("No such type")
+        return parentInterface.getSpanCount()
 
     }
 
     override fun onBindViewHolder(
-        holder: ItemViewHolder,
+        holder: ProductViewHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
@@ -56,59 +64,6 @@ class ProductAdapter(
             }
         }
         holder.setOnClickListeners(item)
-    }
-}
-
-class ItemViewHolder(
-    private val binding: ItemProductFeedBinding,
-    private val favoriteListener: (ItemProduct, Boolean) -> Unit,
-    private val itemClickListener: (Int) -> Unit
-) : RecyclerView.ViewHolder(binding.root) {
-    private val context = itemView.context
-
-    fun bind(item: ItemProduct) {
-        setProductImage(item.image)
-        setProductTitle(item.title)
-        setProductDescription(item.description)
-        setProductPrice(item.price)
-        setProductFavoriteStatus(item.isFavorite)
-    }
-
-    fun setProductImage(image: String) {
-        binding.productImage.load(image)
-    }
-
-    fun setProductPrice(price: Double) {
-        binding.priceLarge.text = price.toString()
-        binding.priceSmall.text = context.getString(R.string.price_holder, price.toString())
-    }
-
-    fun setProductDescription(description: String) {
-        binding.productDescription.text = description
-    }
-
-    fun setProductTitle(title: String) {
-        binding.productTitle.text = title
-    }
-
-    fun setProductFavoriteStatus(isFavorite: Boolean) {
-        binding.addToFavoritesButton.setImageResource(
-            when (isFavorite) {
-                true -> (R.drawable.ic_favorites_selected_feed)
-                false -> (R.drawable.ic_favorites)
-            }
-        )
-        binding.addToFavoritesButton.isSelected = isFavorite
-    }
-
-    fun setOnClickListeners(item: ItemProduct) {
-        binding.addToFavoritesButton.setOnClickListener {
-            favoriteListener(item, !it.isSelected)
-            binding.addToFavoritesButton.isSelected = !it.isSelected
-        }
-        binding.productInFeedContainer.setOnClickListener {
-            itemClickListener(item.id)
-        }
     }
 }
 
@@ -164,4 +119,7 @@ sealed class ProductPayloads : Payloads {
     data class PriceChanged(val newPrice: Double) : ProductPayloads()
     data class ImageChanged(val newImage: String) : ProductPayloads()
     data class FavoriteStatusChanged(val newFavoriteStatus: Boolean) : ProductPayloads()
+}
+interface ProductFragment {
+    fun getSpanCount() : Int
 }

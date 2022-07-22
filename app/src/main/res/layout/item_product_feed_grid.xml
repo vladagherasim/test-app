@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/productInFeedContainer"
     android:layout_width="match_parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginStart="@dimen/padding_small"
+    android:layout_marginEnd="@dimen/padding_small"
     android:layout_height="wrap_content">
 
     <View
@@ -11,8 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/gray_e5ebe9"
-        android:layout_marginStart="@dimen/padding_small"
-        android:layout_marginEnd="@dimen/padding_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +25,7 @@
         android:layout_width="@dimen/_88sdp"
         android:layout_height="@dimen/_66sdp"
         android:layout_marginStart="@dimen/padding_small"
-        android:layout_marginTop="@dimen/padding_regular"
+        android:layout_marginTop="@dimen/_4sdp"
         android:contentDescription="@string/product_image_description"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +34,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/productDataContainer"
-        android:layout_width="@dimen/_180sdp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/productImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productImage">
 
@@ -73,6 +74,7 @@
             android:id="@+id/productDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="@dimen/padding_small"
             android:maxLines="1"
             android:textAppearance="@style/regular_text"
@@ -83,9 +85,11 @@
 
         <TextView
             android:id="@+id/productTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/padding_small"
             android:textAppearance="@style/title_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,8 +101,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_small"
-            android:layout_marginTop="@dimen/padding_small"
-            android:layout_marginBottom="@dimen/padding_regular"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/padding_small"
             android:adjustViewBounds="false"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/product_description"
@@ -119,9 +123,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_regular"
-            android:layout_marginTop="@dimen/padding_small"
+            android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/padding_small"
-            android:layout_marginBottom="@dimen/padding_regular"
+            android:layout_marginBottom="@dimen/padding_small"
             android:backgroundTint="@color/white"
             android:contentDescription="@string/product_description"
             android:src="@drawable/ic_add_cart"
