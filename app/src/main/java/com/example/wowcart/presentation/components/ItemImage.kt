@@ -1,4 +1,4 @@
-package com.example.wowcart.presentation.details
+package com.example.wowcart.presentation.components
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load

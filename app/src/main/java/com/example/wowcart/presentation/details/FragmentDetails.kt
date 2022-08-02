@@ -1,34 +1,21 @@
 package com.example.wowcart.presentation.details
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wowcart.databinding.FragmentProductDetailsBinding
+import com.example.wowcart.presentation.components.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductDetails : Fragment() {
+class ProductDetails : BaseFragment<FragmentProductDetailsBinding>() {
 
-    private var _binding: FragmentProductDetailsBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel by viewModels<ProductDetailsViewModel>()
+    override val viewModel by viewModels<ProductDetailsViewModel>()
     private val args: ProductDetailsArgs by navArgs()
     private val adapter = DetailsAdapter()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentProductDetailsBinding.inflate(inflater)
-        super.onCreate(savedInstanceState)
-        _binding = FragmentProductDetailsBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +54,7 @@ class ProductDetails : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun getViewBinding() = FragmentProductDetailsBinding.inflate(layoutInflater)
 
 }
 

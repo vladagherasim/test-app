@@ -1,35 +1,20 @@
 package com.example.wowcart.presentation.favorites
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wowcart.databinding.FragmentFavoritesBinding
+import com.example.wowcart.presentation.components.BaseFragment
 import com.example.wowcart.presentation.feed.ItemProduct
 import com.example.wowcart.utils.getNavOptions
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class Favorites : Fragment() {
-
-    private var _binding: FragmentFavoritesBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel by viewModels<ProductFavoritesViewModel>()
+class Favorites : BaseFragment<FragmentFavoritesBinding>() {
+    override val viewModel by viewModels<ProductFavoritesViewModel>()
     private val adapter = FavoritesAdapter(this::onItemFavorite, this::onItemClick)
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater)
-        super.onCreate(savedInstanceState)
-        _binding = FragmentFavoritesBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,9 +55,6 @@ class Favorites : Fragment() {
         findNavController().navigate(directions, getNavOptions())
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+    override fun getViewBinding() = FragmentFavoritesBinding.inflate(layoutInflater)
 
 }

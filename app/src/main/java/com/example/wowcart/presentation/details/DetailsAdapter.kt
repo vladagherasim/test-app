@@ -98,7 +98,7 @@ class DetailsAdapter : ListAdapter<Item, ViewHolder>(ItemDiffCallback()) {
                 if (myPayload.isNullOrEmpty()) {
                     holder.bind(item)
                 } else {
-                    inspector.inspectPayloads(myPayload, InformationInstructor(), holder)
+                    inspector.inspectPayloads(myPayload, TextInstructor(), holder)
                 }
             }
 
@@ -106,5 +106,5 @@ class DetailsAdapter : ListAdapter<Item, ViewHolder>(ItemDiffCallback()) {
     }
 }
 
-private val inspector = Novalles.provideInspectorFromInstructor(InformationInstructor::class)
+private val inspector = Novalles.provideInspectorFromInstructor(TextInstructor::class)
 

@@ -97,6 +97,7 @@
             android:src="@drawable/selector_animated"
             app:backgroundTint="@color/white"
             app:fabSize="mini"
+            android:cropToPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/priceLarge"

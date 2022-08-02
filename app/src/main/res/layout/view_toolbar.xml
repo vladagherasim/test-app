@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.615"
-        app:srcCompat="@drawable/ic_user" />
+        tools:srcCompat="@drawable/ic_user" />
 
     <ImageView
         android:id="@+id/middleButton"
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toEndOf="@+id/leftButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.526"
-        app:srcCompat="@drawable/ic_logo_small" />
+        tools:srcCompat="@drawable/ic_logo_small" />
 
     <ImageButton
         android:id="@+id/rightButton"
@@ -52,13 +52,15 @@
         android:minHeight="48dp"
         android:paddingEnd="@dimen/padding_small"
         android:stateListAnimator="@animator/anim_button"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/middleButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.636"
-        app:srcCompat="@drawable/ic_favorites"
+        tools:srcCompat="@drawable/ic_favorites"
         app:tint="@color/white" />
 
 

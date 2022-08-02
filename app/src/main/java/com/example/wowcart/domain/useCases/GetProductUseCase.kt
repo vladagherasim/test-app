@@ -4,7 +4,7 @@ import com.example.wowcart.R
 import com.example.wowcart.domain.repositories.ProductsRepository
 import com.example.wowcart.presentation.components.ItemMiddleText
 import com.example.wowcart.presentation.components.ItemText
-import com.example.wowcart.presentation.details.ItemImage
+import com.example.wowcart.presentation.components.ItemImage
 import com.example.wowcart.utils.Dimen
 import com.example.wowcart.utils.DimenS
 import com.example.wowcart.utils.Margin

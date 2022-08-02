@@ -11,4 +11,10 @@
     <string name="my_cart">MY CART</string>
     <string name="favorites">FAVORITES</string>
     <string name="sort_by">SORT BY</string>
+    <string name="welcome">Welcome to WOW!</string>
+    <string name="login_text">Login to begin the adventure</string>
+    <string name="google_login">LOGIN WITH GOOGLE</string>
+    <string name="facebook_login">LOGIN WITH FACEBOOK</string>
+    <string name="continue_as_guest">CONTINUE AS GUEST</string>
+    <string name="or">OR</string>
 </resources>

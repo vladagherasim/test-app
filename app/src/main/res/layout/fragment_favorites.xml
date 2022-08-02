@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.favorites.Favorites">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -51,6 +52,9 @@
         android:layout_marginEnd="@dimen/padding_small"
         android:layout_marginBottom="@dimen/_20sdp"
         app:cartIcon="@drawable/ic_add_cart"
+        android:stateListAnimator="@animator/anim_button"
+        android:clickable="true"
+        android:focusable="true"
         app:itemsNumber="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,20 +87,6 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/sortBy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="188dp"
-            android:fontFamily="@font/open_sans_semi_bold"
-            android:text="@string/sort_by"
-            android:textColor="@color/dark_182867"
-            android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/favoritesCount"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.428" />
-
-        <TextView
             android:id="@+id/favoritesCount"
             android:layout_width="@dimen/_12sdp"
             android:layout_height="@dimen/_12sdp"
@@ -111,6 +101,31 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="3" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:stateListAnimator="@animator/anim_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/sortBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="188dp"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="@string/sort_by"
+            android:layout_marginEnd="@dimen/padding_small"
+            android:textColor="@color/dark_182867"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chevronIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.428" />
+
         <ImageView
             android:id="@+id/chevronIcon"
             android:layout_width="wrap_content"
@@ -120,9 +135,10 @@
             android:contentDescription="@string/product_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sortBy"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/dark_gray_141515" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

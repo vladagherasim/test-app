@@ -17,8 +17,7 @@ import javax.inject.Inject
 class ProductDetailsViewModel @Inject constructor(
     private val getProductUseCase: GetProductUseCase,
     private val changeFavoriteStatusUseCase: ChangeFavoriteStatusUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
     private val itemListener = createListedLiveData<Item>()
     val item = itemListener.toLiveData()
 

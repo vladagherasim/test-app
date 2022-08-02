@@ -19,8 +19,7 @@ class ProductFavoritesViewModel @Inject constructor(
     private val numberUseCase: GetFavoritesNumberUseCase,
     private val favoritesUseCase: GetFavoritesUseCase,
     private val changeUseCase: ChangeFavoriteStatusUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
     private val favoritesListener = createListedLiveData<ItemProduct>()
     val favorites = favoritesListener.toLiveData()
 
