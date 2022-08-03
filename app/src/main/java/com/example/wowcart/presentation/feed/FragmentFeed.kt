@@ -84,6 +84,9 @@ class ProductFeed : BaseFragment<FragmentProductFeedBinding>(), ProductFragment 
             bottomBarView.setOnClickListener {
                 Toast.makeText(context, "Cart button clicked", Toast.LENGTH_SHORT).show()
             }
+            toolbarHolder.viewBinding.leftButton.setOnClickListener {
+                findNavController().navigate(R.id.action_productFeed_toLogin)
+            }
         }
     }
 

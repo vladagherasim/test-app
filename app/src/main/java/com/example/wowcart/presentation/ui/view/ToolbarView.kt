@@ -32,19 +32,19 @@ class ToolbarView @JvmOverloads constructor(
             leftButton.setImageResource(
                 attr.getResourceId(
                     R.styleable.Toolbar_toolbarLeftImage,
-                    R.drawable.ic_user
+                    0
                 )
             )
             middleButton.setImageResource(
                 attr.getResourceId(
                     R.styleable.Toolbar_toolbarCenterImage,
-                    R.drawable.ic_logo
+                    0
                 )
             )
             rightButton.setImageResource(
                 attr.getResourceId(
                     R.styleable.Toolbar_toolbarRightImage,
-                    R.drawable.ic_favorites
+                    0
                 )
             )
 

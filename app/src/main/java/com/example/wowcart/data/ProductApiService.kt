@@ -2,9 +2,9 @@ package com.example.wowcart.data
 
 import com.example.wowcart.data.dto.ProductDTO
 import com.example.wowcart.data.dto.ProductsResponse
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import com.example.wowcart.models.LoginResponse
+import com.example.wowcart.models.RegisterResponse
+import retrofit2.http.*
 
 interface ProductApiService {
     @GET("/products")
@@ -12,5 +12,13 @@ interface ProductApiService {
 
     @GET("/products/{id}")
     suspend fun getProductById(@Path("id") id: Int): ProductDTO
+
+    @POST("/users/login")
+    suspend fun postLogin(@Query("email") email: String, @Query("password") password: String): LoginResponse
+
+    @POST("/users/register")
+    suspend fun registerUser(@Body params: HashMap<String, Any>): RegisterResponse
+
+
 }
 

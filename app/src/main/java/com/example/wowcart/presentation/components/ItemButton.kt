@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wowcart.databinding.ItemButtonBinding
+import com.example.wowcart.presentation.login.LoginAdapter
 import com.example.wowcart.utils.IMargin
 import com.example.wowcart.utils.TextTypes
 import com.example.wowcart.utils.common.Item
@@ -30,7 +31,7 @@ data class ItemButton(
     @FontRes val textFont: Int,
     @DrawableRes val background: Int,
     @DrawableRes val iconStart: Int? = null,
-    val margin: IMargin,
+    val margin: IMargin
 ) : Item {
     private val uiModelHelper = Novalles.provideUiInterfaceFor(ItemButton::class)
 
@@ -52,7 +53,8 @@ data class ItemButton(
 class ButtonInstructor : Instructor
 
 class ButtonHolder(
-    private val binding: ItemButtonBinding
+    private val binding: ItemButtonBinding,
+    private val processAction: (LoginAdapter.LoginAction) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     private val context get() = itemView.context
 
@@ -64,6 +66,7 @@ class ButtonHolder(
         setMargin(item.margin)
         setIconStart(item.iconStart)
         setBackground(item.background)
+        setClickListener(item.tag)
     }
 
     fun setSize(@DimenRes size: Int) {
@@ -90,10 +93,16 @@ class ButtonHolder(
     }
 
     fun setIconStart(iconStart: Int?) {
-        binding.iconStart.setImageResource(iconStart?: 0)
+        binding.iconStart.setImageResource(iconStart ?: 0)
     }
 
     fun setBackground(background: Int) {
         binding.customButton.setBackgroundResource(background)
+    }
+
+    fun setClickListener(tag: String) {
+        binding.customButton.setOnClickListener {
+            processAction(LoginAdapter.LoginAction.ButtonClicked(tag = tag))
+        }
     }
 }

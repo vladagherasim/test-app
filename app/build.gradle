@@ -103,6 +103,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
 
+    //novalles
     implementation 'com.github.flexeiprata:novalles:0.3.0'
     ksp 'com.github.flexeiprata:novalles:0.3.0'
 
@@ -111,4 +112,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    //google sign in
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 }

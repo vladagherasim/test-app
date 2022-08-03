@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_productFeed_to_favorites"
             app:destination="@id/favorites" />
+        <action
+            android:id="@+id/action_productFeed_toLogin"
+            app:destination="@+id/login"/>
     </fragment>
     <fragment
         android:id="@+id/favorites"
@@ -27,6 +30,13 @@
         <argument
             android:name="id"
             app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.wowcart.presentation.login.FragmentLogin">
+        <action
+            android:id="@+id/action_login_toProductFeed"
+            app:destination="@+id/productFeed"/>
     </fragment>
 
 </navigation>

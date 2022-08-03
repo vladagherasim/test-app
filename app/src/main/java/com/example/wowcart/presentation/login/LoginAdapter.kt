@@ -12,10 +12,14 @@ import com.example.wowcart.presentation.ui.ItemDiffCallback
 import com.example.wowcart.utils.common.Item
 import com.flexeiprata.novalles.interfaces.Novalles
 
-class LoginAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback()) {
+class LoginAdapter(val processAction: (LoginAction) -> Unit) : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback()) {
     private val itemText = 1
     private val itemButton = 2
     private val itemSeparator = 3
+
+    private val buttonInspector = Novalles.provideInspectorFromInstructor(ButtonInstructor::class)
+    private val textInspector = Novalles.provideInspectorFromInstructor(TextInstructor::class)
+    private val separatorInspector = Novalles.provideInspectorFromInstructor(SeparatorInstructor::class)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
@@ -25,7 +29,7 @@ class LoginAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback
                     parent,
                     false
                 )
-                return ButtonHolder(binding)
+                return ButtonHolder(binding, processAction)
             }
             itemText -> {
                 val binding = ItemInformationTextBinding.inflate(
@@ -92,8 +96,9 @@ class LoginAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback
         }
     }
 
+    sealed interface LoginAction {
+        data class ButtonClicked(val tag: String): LoginAction
+    }
+
 }
 
-private val buttonInspector = Novalles.provideInspectorFromInstructor(ButtonInstructor::class)
-private val textInspector = Novalles.provideInspectorFromInstructor(TextInstructor::class)
-private val separatorInspector = Novalles.provideInspectorFromInstructor(SeparatorInstructor::class)
